@@ -66,15 +66,6 @@ function Login(props) {
             </a>
           </div>
         </form>
-        <div className="text-center">
-          <a
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://myidol46.netlify.app/privacy"
-          >
-            Privacy Claim
-          </a>
-        </div>
       </div>
     </div>
   );

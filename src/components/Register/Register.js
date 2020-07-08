@@ -1,4 +1,16 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { register } from '../../actions';
+
+const mapStateToProps = () => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSubmit: (username, password) => dispatch(register(username, password)),
+  };
+};
 
 function Register(props) {
   const [username, setUsername] = useState('');
@@ -44,19 +56,28 @@ function Register(props) {
               type="button"
               onClick={() => onSubmit(username, password)}
             >
-              Sign In
+              <a href="/">Register</a>
             </button>
             <a
               className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="/register"
+              href="/"
             >
-              Register
+              Sign In
             </a>
           </div>
         </form>
+        <div className="text-center">
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://myidol46.netlify.app/privacy"
+          >
+            Privacy Claim
+          </a>
+        </div>
       </div>
     </div>
   );
 }
 
-export default Register;
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -9,6 +9,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOGOUT,
+  REGISTER_SUCCESS,
 } from './constants';
 
 const initialPlayerStats = {
@@ -74,6 +75,7 @@ const initialUser = {
 export const logUserIn = (state = initialUser, action = {}) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
       return Object.assign({}, state, {
         username: action.payload.username,
         userID: action.payload.userID,

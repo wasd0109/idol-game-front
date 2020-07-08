@@ -8,6 +8,9 @@ import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
+  REGISTER_PENDING,
+  REGISTER_SUCCESS,
+  REGISTER_FAILED,
   LOGOUT,
 } from './constants';
 
@@ -65,6 +68,17 @@ export const login = (username, password) => (dispatch) => {
     dispatch(getPlayerStats(0));
   } else {
     dispatch({ type: LOGIN_FAILED });
+  }
+};
+
+export const register = (username, password) => (dispatch) => {
+  dispatch({ type: REGISTER_PENDING });
+  if (true) {
+    dispatch({
+      type: REGISTER_SUCCESS,
+      payload: { username: 'wasd0109', userID: 0, loggedIn: true },
+    });
+    dispatch(getPlayerStats(0));
   }
 };
 
