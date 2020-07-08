@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Profile from './containers/Profile';
+
+import { getPlayerStats } from './actions';
+
 import './output.css';
 import './App.css';
 
-function App() {
+const mapStateToProps = (state) => {
+  return { player: state.setPlayerStats.player };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getPlayerStats: () => dispatch(getPlayerStats()),
+  };
+};
+
+function App(props) {
+  const { getPlayerStats, player } = props;
+  useEffect(() => {
+    getPlayerStats();
+  }, []);
   return (
     <Router>
       <div>
         <div id="navbar">
-          <nav className="flex flex-wrap bg-blue-300 p-6">
+          <nav className="flex flex-wrap bg-blue-300 p-4">
             <Link to="/" className="pr-2">
               Home
             </Link>
@@ -22,7 +40,7 @@ function App() {
         </div>
         <Switch>
           <Route path="/">
-            <Profile />
+            <Profile char={player} />
           </Route>
         </Switch>
       </div>
@@ -30,4 +48,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

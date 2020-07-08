@@ -1,0 +1,45 @@
+import {
+  ACTION_PENDING,
+  ACTION_SUCCESS,
+  ACTION_FAILED,
+  GET_PLAYER_STATS_PENDING,
+  GET_PLAYER_STATS_SUCCESS,
+  GET_PLAYER_STATS_FAILED,
+} from './constants';
+
+export const getPlayerStats = (userID) => (dispatch) => {
+  console.log('test');
+  const player = {
+    name: 'Pekorin',
+    title: 'center',
+    HP: '100',
+    level: '0',
+    attack: '23',
+    defense: '30',
+    magic_attack: '30',
+    magic_defense: '15',
+    element: 'fire',
+    agility: '10',
+    luck: '5',
+  };
+  dispatch({ type: GET_PLAYER_STATS_SUCCESS, payload: player });
+};
+
+export const performAction = (event) => (dispatch) => {
+  const player = {
+    name: 'Pekorin',
+    title: 'center',
+    HP: '100',
+    level: '1',
+    attack: '23',
+    defense: '40',
+    magic_attack: '50',
+    magic_defense: '15',
+    element: 'fire',
+    agility: '10',
+    luck: '5',
+  };
+  const results = 'Practice for live 1 level up';
+  dispatch({ type: GET_PLAYER_STATS_SUCCESS, payload: player });
+  dispatch({ type: ACTION_SUCCESS, payload: results });
+};

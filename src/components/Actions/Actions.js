@@ -1,57 +1,57 @@
 import React from 'react';
 import './Actions.css';
+import { connect } from 'react-redux';
 
-const performed = [
-  'Running',
-  'Joking',
-  'Haha',
-  'Catch',
-  'Running',
-  'Joking',
-  'Haha',
-  'Catch',
-  'Running',
-  'Joking',
-  'Haha',
-  'Catch',
-  'Joking',
-  'Haha',
-  'Catch',
-  'Running',
-  'Joking',
-  'Haha',
-  'Catch',
-];
+import { performAction } from '../../actions';
 
-function Actions() {
+const mapStateToProps = (state) => {
+  console.log(state.receiveActionResults.actionResults);
+  return {
+    actionResults: state.receiveActionResults.actionResults,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    performAction: (event) => dispatch(performAction()),
+  };
+};
+
+function Actions(props) {
+  const { actionResults, performAction } = props;
   return (
-    <div className="w-6/12">
+    <div className="w-7/12 m-auto">
       <div id="performed" className="border-2 p-2 overflow-y-scroll">
-        {performed.map((action, i) => {
-          return <h1 className="">{action}</h1>;
+        {actionResults.map((action, i) => {
+          return (
+            <h1 key={i} className="">
+              {action}
+            </h1>
+          );
         })}
       </div>
       <div id="actions" className="flex justify-evenly my-2">
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded w-2/12"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
           id="practice"
+          onClick={performAction}
         >
           Practice
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded w-2/12"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded w-2/12"
           id="live"
         >
           Live
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded w-2/12"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
           id="tsunagari"
         >
           Tsunagari
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded w-2/12"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
           id="tweet"
         >
           Tweet
@@ -61,4 +61,4 @@ function Actions() {
   );
 }
 
-export default Actions;
+export default connect(mapStateToProps, mapDispatchToProps)(Actions);
