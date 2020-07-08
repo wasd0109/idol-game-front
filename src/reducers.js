@@ -5,6 +5,10 @@ import {
   GET_PLAYER_STATS_PENDING,
   GET_PLAYER_STATS_SUCCESS,
   GET_PLAYER_STATS_FAILED,
+  LOGIN_PENDING,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGOUT,
 } from './constants';
 
 const initialPlayerStats = {
@@ -27,6 +31,8 @@ export const setPlayerStats = (state = initialPlayerStats, action = {}) => {
   switch (action.type) {
     case GET_PLAYER_STATS_SUCCESS:
       return Object.assign({}, state, { player: action.payload });
+    case LOGOUT:
+      return Object.assign({}, state, {});
     default:
       return state;
   }
@@ -50,6 +56,31 @@ export const receiveActionResults = (
       return Object.assign({}, state, {
         actionResults: state.actionResults.concat([action.payload]),
       });
+    default:
+      return state;
+  }
+};
+
+const initialUser = {
+  username: localStorage.getItem('username')
+    ? localStorage.getItem('username')
+    : '',
+  userID: localStorage.getItem('userID') ? localStorage.getItem('userID') : '',
+  loggedIn: localStorage.getItem('loggedIn')
+    ? localStorage.getItem('loggedIn')
+    : false,
+};
+
+export const logUserIn = (state = initialUser, action = {}) => {
+  switch (action.type) {
+    case LOGIN_SUCCESS:
+      return Object.assign({}, state, {
+        username: action.payload.username,
+        userID: action.payload.userID,
+        loggedIn: action.payload.loggedIn,
+      });
+    case LOGOUT:
+      return Object.assign({}, state, { loggedIn: action.payload.loggedIn });
     default:
       return state;
   }

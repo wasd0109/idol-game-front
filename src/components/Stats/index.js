@@ -1,2 +1,2 @@
-import Profile from './Stats';
-export default Profile;
+import Stats from './Stats';
+export default Stats;
