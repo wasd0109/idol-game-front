@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { performAction } from '../../actions';
 
 const mapStateToProps = (state) => {
-  console.log(state.receiveActionResults.actionResults);
   return {
     actionResults: state.receiveActionResults.actionResults,
   };
@@ -13,7 +12,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    performAction: (event) => dispatch(performAction()),
+    performAction: (event) => dispatch(performAction(event)),
   };
 };
 

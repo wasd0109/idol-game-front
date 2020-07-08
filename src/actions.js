@@ -26,6 +26,8 @@ export const getPlayerStats = (userID) => (dispatch) => {
 };
 
 export const performAction = (event) => (dispatch) => {
+  dispatch({ type: ACTION_PENDING });
+  console.log(event.target.id);
   const player = {
     name: 'Pekorin',
     title: 'center',
