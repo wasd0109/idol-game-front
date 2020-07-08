@@ -9,6 +9,7 @@ import { getPlayerStats, logout } from './actions';
 import './output.css';
 import './App.css';
 import Login from './components/Login';
+import Register from './components/Register';
 
 const mapStateToProps = (state) => {
   return {
@@ -32,7 +33,18 @@ function App(props) {
     getPlayerStats(userID);
   }, []);
   if (!loggedIn) {
-    return <Login />;
+    return (
+      <Router>
+        <Switch>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/">
+            <Login />
+          </Route>
+        </Switch>
+      </Router>
+    );
   }
   // REMOVE THIS AND SWITCH TO OTHER COOKIE METHOD
   localStorage.setItem('username', username);

@@ -1,18 +1,6 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { login } from '../../actions';
 
-const mapStateToProps = () => {
-  return {};
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onSubmit: (username, password) => dispatch(login(username, password)),
-  };
-};
-
-function Login(props) {
+function Register(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { onSubmit } = props;
@@ -66,18 +54,9 @@ function Login(props) {
             </a>
           </div>
         </form>
-        <div className="text-center">
-          <a
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://myidol46.netlify.app/privacy"
-          >
-            Privacy Claim
-          </a>
-        </div>
       </div>
     </div>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Register;
