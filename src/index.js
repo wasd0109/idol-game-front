@@ -14,7 +14,7 @@ const rootReducer = combineReducers({ setPlayerStats, receiveActionResults });
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(logger, thunkMiddleware)
+  applyMiddleware(thunkMiddleware, logger)
 );
 
 ReactDOM.render(

@@ -18,8 +18,10 @@ const mapDispatchToProps = (dispatch) => {
 
 function Actions(props) {
   const { actionResults, performAction } = props;
+  localStorage.setItem('actionList', actionResults);
+
   return (
-    <div className="w-7/12 m-auto">
+    <div className="w-full my-2 md:my-0 md:w-7/12 m-auto">
       <div id="performed" className="border-2 p-2 overflow-y-scroll">
         {actionResults.map((action, i) => {
           return (
@@ -40,18 +42,21 @@ function Actions(props) {
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded w-2/12"
           id="live"
+          onClick={performAction}
         >
           Live
         </button>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
           id="tsunagari"
+          onClick={performAction}
         >
           Tsunagari
         </button>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
           id="tweet"
+          onClick={performAction}
         >
           Tweet
         </button>

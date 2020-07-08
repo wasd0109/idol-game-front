@@ -9,7 +9,7 @@ function Profile({ char }) {
   }
 
   return (
-    <div className="flex mx-4 my-2">
+    <div className="flex mx-4 my-2 flex-wrap">
       <Stats stats={stats} />
       <Actions />
     </div>

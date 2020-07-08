@@ -32,7 +32,11 @@ export const setPlayerStats = (state = initialPlayerStats, action = {}) => {
   }
 };
 
-const initialActionResults = { actionResults: [] };
+const initialActionResults = {
+  actionResults: localStorage.getItem('actionList')
+    ? localStorage.getItem('actionList').split(',')
+    : [],
+};
 
 export const receiveActionResults = (
   state = initialActionResults,
@@ -40,6 +44,9 @@ export const receiveActionResults = (
 ) => {
   switch (action.type) {
     case ACTION_SUCCESS:
+      if (state.actionResults.length > 15) {
+        state.actionResults.shift();
+      }
       return Object.assign({}, state, {
         actionResults: state.actionResults.concat([action.payload]),
       });
