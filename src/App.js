@@ -2,14 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import Profile from './containers/Profile';
-
 import { getPlayerStats, logout } from './actions';
-
-import './output.css';
-import './App.css';
+import Profile from './containers/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
+import './output.css';
+import './App.css';
 
 const mapStateToProps = (state) => {
   return {
@@ -30,8 +28,10 @@ const mapDispatchToProps = (dispatch) => {
 function App(props) {
   const { getPlayerStats, player, username, userID, loggedIn, logout } = props;
   useEffect(() => {
-    getPlayerStats(userID);
-  }, []);
+    if (loggedIn) {
+      getPlayerStats(userID);
+    }
+  }, [userID]);
   if (!loggedIn) {
     return (
       <Router>
@@ -53,17 +53,16 @@ function App(props) {
   return (
     <Router>
       <div>
-        <div id="navbar">
-          <nav className="flex flex-wrap bg-blue-300 p-4">
-            <Link to="/" className="pr-2">
-              Home
-            </Link>
+        <nav className="flex flex-wrap bg-blue-300 p-4" id="navbar">
+          <Link to="/" className="pr-2">
+            Home
+          </Link>
 
-            <Link to="/players" className="pr-2">
-              Player List
-            </Link>
+          <Link to="/players" className="pr-2">
+            Player List
+          </Link>
+          <Link to="/" className="ml-auto">
             <button
-              className="ml-auto"
               onClick={() => {
                 localStorage.clear();
                 logout();
@@ -71,11 +70,12 @@ function App(props) {
             >
               Log Out
             </button>
-          </nav>
-        </div>
+          </Link>
+        </nav>
+
         <Switch>
           <Route path="/">
-            <Profile char={player} />
+            <Profile player={player} />
           </Route>
         </Switch>
       </div>

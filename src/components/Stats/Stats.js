@@ -12,6 +12,7 @@ function Stats({ stats }) {
           className="w-12/12 border-l-0 border-r-2 border-b-2 m-auto"
         />
         {stats.map((stat) => {
+          if (stat[0] === 'id' || stat[0] === 'userid') return;
           return (
             <li
               key={stat[0]}

@@ -7,13 +7,19 @@ import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { setPlayerStats, receiveActionResults, logUserIn } from './reducers';
+import {
+  setPlayerStats,
+  receiveActionResults,
+  logUserIn,
+  triggerError,
+} from './reducers';
 
 const logger = createLogger();
 const rootReducer = combineReducers({
   setPlayerStats,
   receiveActionResults,
   logUserIn,
+  triggerError,
 });
 
 const store = createStore(

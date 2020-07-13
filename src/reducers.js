@@ -10,6 +10,7 @@ import {
   LOGIN_FAILED,
   LOGOUT,
   REGISTER_SUCCESS,
+  REGISTER_FAILED,
 } from './constants';
 
 const initialPlayerStats = {
@@ -66,7 +67,7 @@ const initialUser = {
   username: localStorage.getItem('username')
     ? localStorage.getItem('username')
     : '',
-  userID: localStorage.getItem('userID') ? localStorage.getItem('userID') : '',
+  userID: localStorage.getItem('userID') ? localStorage.getItem('userID') : 0,
   loggedIn: localStorage.getItem('loggedIn')
     ? localStorage.getItem('loggedIn')
     : false,
@@ -82,7 +83,27 @@ export const logUserIn = (state = initialUser, action = {}) => {
         loggedIn: action.payload.loggedIn,
       });
     case LOGOUT:
-      return Object.assign({}, state, { loggedIn: action.payload.loggedIn });
+      localStorage.clear();
+      return Object.assign({}, state, { loggedIn: false });
+    default:
+      return state;
+  }
+};
+
+const initialError = {
+  isError: false,
+};
+
+export const triggerError = (state = initialError, action = {}) => {
+  switch (action.type) {
+    case LOGIN_FAILED:
+    case REGISTER_FAILED:
+      return Object.assign({}, state, {
+        isError: true,
+      });
+    case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
+      return { ...state, isError: false };
     default:
       return state;
   }

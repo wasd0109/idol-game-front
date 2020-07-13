@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions';
+import ErrorBar from '../ErrorBar/index';
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  return { isError: state.triggerError.isError };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -15,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
 function Login(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { onSubmit } = props;
+  const { onSubmit, isError } = props;
   return (
     <div className="flex justify-center mt-4 md:mt-16">
       <div className="w-full max-w-xs">
@@ -32,6 +33,7 @@ function Login(props) {
               id="username"
               type="text"
               placeholder="Username"
+              value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
           </div>
@@ -47,14 +49,19 @@ function Login(props) {
               id="password"
               type="password"
               placeholder="******************"
+              value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
+          {isError ? <ErrorBar msg={'Wrong username or password'} /> : null}
           <div className="flex items-center justify-between">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-              onClick={() => onSubmit(username, password)}
+              type="submit"
+              onClick={(event) => {
+                event.preventDefault();
+                onSubmit(username, password);
+              }}
             >
               Sign In
             </button>
