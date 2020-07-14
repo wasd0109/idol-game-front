@@ -3,7 +3,6 @@ import Stats from '../../components/Stats';
 import Actions from '../../components/Actions';
 
 function Profile({ player }) {
-  console.log('Profile', player);
   if (!player) {
     return <div>Loading</div>;
   }

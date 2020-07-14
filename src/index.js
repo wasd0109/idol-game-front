@@ -14,13 +14,22 @@ import {
   triggerError,
 } from './reducers';
 
+import { LOGOUT } from './constants';
+
 const logger = createLogger();
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   setPlayerStats,
   receiveActionResults,
   logUserIn,
   triggerError,
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === LOGOUT) {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
 
 const store = createStore(
   rootReducer,

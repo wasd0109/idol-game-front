@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
 import { getPlayerStats, logout } from './actions';
 import Profile from './containers/Profile';
-import Login from './components/Login';
-import Register from './components/Register';
 import './output.css';
 import './App.css';
+
+const LazyLogin = React.lazy(() => import('./components/Login'));
+const LazyRegister = React.lazy(() => import('./components/Register'));
 
 const mapStateToProps = (state) => {
   return {
@@ -30,26 +30,27 @@ function App(props) {
   useEffect(() => {
     if (loggedIn) {
       getPlayerStats(userID);
+      localStorage.setItem('username', username);
+      localStorage.setItem('userID', userID);
+      localStorage.setItem('loggedIn', loggedIn);
     }
-  }, [userID]);
+  }, [userID, loggedIn, username, getPlayerStats]);
   if (!loggedIn) {
     return (
-      <Router>
-        <Switch>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/">
-            <Login />
-          </Route>
-        </Switch>
-      </Router>
+      <Suspense fallback={<div>Loading</div>}>
+        <Router>
+          <Switch>
+            <Route path="/register">
+              <LazyRegister />
+            </Route>
+            <Route path="/">
+              <LazyLogin />
+            </Route>
+          </Switch>
+        </Router>
+      </Suspense>
     );
   }
-  // REMOVE THIS AND SWITCH TO OTHER COOKIE METHOD
-  localStorage.setItem('username', username);
-  localStorage.setItem('userID', userID);
-  localStorage.setItem('loggedIn', loggedIn);
   return (
     <Router>
       <div>

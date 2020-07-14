@@ -25,24 +25,25 @@ export const getPlayerStats = (userID) => (dispatch) => {
 };
 
 export const performAction = (event) => (dispatch) => {
-  // dispatch({ type: ACTION_PENDING });
-  // console.log(event.target.id);
-  // const player = {
-  //   name: 'Pekorin',
-  //   title: 'center',
-  //   HP: '100',
-  //   level: '1',
-  //   attack: '23',
-  //   defense: '40',
-  //   magic_attack: '50',
-  //   magic_defense: '15',
-  //   element: 'fire',
-  //   agility: '10',
-  //   luck: '5',
-  // };
-  // const results = `Practice for live 1 level up`;
-  // dispatch({ type: GET_PLAYER_STATS_SUCCESS, payload: player });
-  // dispatch({ type: ACTION_SUCCESS, payload: results });
+  dispatch({ type: ACTION_PENDING });
+  const userID = event.currentTarget.value;
+  const data = {
+    action: event.currentTarget.id,
+    userID: userID,
+  };
+  fetch(`http://localhost:3002/action`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({ type: ACTION_SUCCESS, payload: data });
+      getPlayerStats(userID)(dispatch);
+    })
+    .catch(() => dispatch({ type: ACTION_FAILED }));
 };
 
 export const login = (username, password) => (dispatch) => {
@@ -62,9 +63,11 @@ export const login = (username, password) => (dispatch) => {
           type: LOGIN_SUCCESS,
           payload: { username: data.username, userID: data.id, loggedIn: true },
         });
+      } else {
+        dispatch({ type: LOGIN_FAILED });
       }
     })
-    .catch(dispatch({ type: LOGIN_FAILED }));
+    .catch(() => dispatch({ type: LOGIN_FAILED }));
 };
 
 export const register = (playerName, username, password) => (dispatch) => {

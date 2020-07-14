@@ -1,11 +1,11 @@
 import {
-  ACTION_PENDING,
+  // ACTION_PENDING,
   ACTION_SUCCESS,
-  ACTION_FAILED,
-  GET_PLAYER_STATS_PENDING,
+  // ACTION_FAILED,
+  // GET_PLAYER_STATS_PENDING,
   GET_PLAYER_STATS_SUCCESS,
-  GET_PLAYER_STATS_FAILED,
-  LOGIN_PENDING,
+  // GET_PLAYER_STATS_FAILED,
+  // LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOGOUT,
@@ -83,7 +83,6 @@ export const logUserIn = (state = initialUser, action = {}) => {
         loggedIn: action.payload.loggedIn,
       });
     case LOGOUT:
-      localStorage.clear();
       return Object.assign({}, state, { loggedIn: false });
     default:
       return state;
