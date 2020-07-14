@@ -7,11 +7,9 @@ function Stats({ stats }) {
   return (
     <div className="md:w-4/12" id="stats">
       <ul className="flex flex-wrap border-l-2 border-t-2">
-        <img
-          src={profileImage}
-          alt="Profile"
-          className="w-12/12 h-auto border-l-0 border-r-2 border-b-2 my-0 mx-auto"
-        />
+        <div className="w-12/12 h-auto border-l-0 border-r-2 border-b-2 m-auto">
+          <img src={profileImage} alt="Profile" />
+        </div>
         {stats.map((stat, i) => {
           if (stat[0] === 'id' || stat[0] === 'userid' || stat[0] === 'message')
             return null;
