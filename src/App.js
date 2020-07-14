@@ -36,18 +36,18 @@ function App(props) {
   }, [userID, loggedIn, username, getPlayerStats]);
   if (!loggedIn) {
     return (
-      <Router>
-        <Switch>
-          <Suspense fallback={<div>Loading</div>}>
+      <Suspense fallback={<div>Loading</div>}>
+        <Router>
+          <Switch>
             <Route path="/register">
               <LazyRegister />
             </Route>
-          </Suspense>
-          <Route path="/">
-            <Login />
-          </Route>
-        </Switch>
-      </Router>
+            <Route path="/">
+              <Login />
+            </Route>
+          </Switch>
+        </Router>
+      </Suspense>
     );
   }
   return (
