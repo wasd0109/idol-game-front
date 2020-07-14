@@ -62,9 +62,12 @@ function Actions(props) {
           });
         })}
       </div>
-      <div id="actions" className="flex justify-evenly my-2">
+      <div
+        id="actions"
+        className="flex justify-evenly my-2 flex-wrap md:no-wrap"
+      >
         <button
-          className="action-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
+          className="action-button text-lg bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-5/12 md:w-2/12"
           id="practice"
           onClick={(event) => {
             performAction(event);
@@ -75,7 +78,7 @@ function Actions(props) {
           Practice
         </button>
         <button
-          className="action-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded w-2/12"
+          className="action-button text-lg bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded w-5/12 md:w-2/12"
           id="live"
           onClick={(event) => {
             performAction(event);
@@ -86,7 +89,7 @@ function Actions(props) {
           Live
         </button>
         <button
-          className="action-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
+          className="action-button text-lg bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  md:px-2 rounded w-5/12 mt-2 md:m-0 md:w-2/12"
           id="tsunagari"
           onClick={(event) => {
             performAction(event);
@@ -97,7 +100,7 @@ function Actions(props) {
           Tsunagari
         </button>
         <button
-          className="action-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
+          className="action-button text-lg bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-5/12 mt-2 md:m-0 md:w-2/12"
           id="tweet"
           onClick={(event) => {
             performAction(event);
@@ -108,14 +111,16 @@ function Actions(props) {
           Tweet
         </button>
       </div>
-      {coolDown ? (
-        <div
-          className="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3"
-          role="alert"
-        >
+      <div
+        className="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3"
+        role="alert"
+      >
+        {coolDown ? (
           <p>Cooling down, please wait {timer / 1000} seconds</p>
-        </div>
-      ) : null}
+        ) : (
+          <p>Press to perform action</p>
+        )}
+      </div>
     </div>
   );
 }
