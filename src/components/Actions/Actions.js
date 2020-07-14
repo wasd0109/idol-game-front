@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 
 function Actions(props) {
   const { actionResults, performAction, userID } = props;
-  const countdownSecond = process.env.NODE_ENV === 'development' ? 1000 : 60000;
+  const countdownSecond = process.env.NODE_ENV === 'development' ? 2000 : 60000;
   const [coolDown, setCoolDown] = useState(
     Boolean(Number(localStorage.getItem('cooldown'))) || false
   );
@@ -36,12 +36,10 @@ function Actions(props) {
       if (!timer) {
         setCoolDown(false);
         setTimer(countdownSecond);
+        btnList.forEach((btn) => btn.removeAttribute('disabled'));
         localStorage.setItem('timer', String(timer));
         localStorage.setItem('cooldown', String(Number(coolDown)));
       }
-      setTimeout(() => {
-        btnList.forEach((btn) => btn.removeAttribute('disabled'));
-      }, timer);
     }
     localStorage.setItem('timer', String(timer));
     localStorage.setItem('cooldown', String(Number(coolDown)));

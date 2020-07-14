@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { getPlayerStats, logout } from './actions';
 import Profile from './containers/Profile';
+import Login from './components/Login';
 import './output.css';
 import './App.css';
-
-const LazyLogin = React.lazy(() => import('./components/Login'));
 const LazyRegister = React.lazy(() => import('./components/Register'));
 
 const mapStateToProps = (state) => {
@@ -37,18 +36,18 @@ function App(props) {
   }, [userID, loggedIn, username, getPlayerStats]);
   if (!loggedIn) {
     return (
-      <Suspense fallback={<div>Loading</div>}>
-        <Router>
-          <Switch>
+      <Router>
+        <Switch>
+          <Suspense fallback={<div>Loading</div>}>
             <Route path="/register">
               <LazyRegister />
             </Route>
-            <Route path="/">
-              <LazyLogin />
-            </Route>
-          </Switch>
-        </Router>
-      </Suspense>
+          </Suspense>
+          <Route path="/">
+            <Login />
+          </Route>
+        </Switch>
+      </Router>
     );
   }
   return (
