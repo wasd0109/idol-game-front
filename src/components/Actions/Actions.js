@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 
 function Actions(props) {
   const { actionResults, performAction, userID } = props;
-  const countdownSecond = 60000;
+  const countdownSecond = 1000;
   const [coolDown, setCoolDown] = useState(
     Boolean(Number(localStorage.getItem('cooldown'))) || false
   );
