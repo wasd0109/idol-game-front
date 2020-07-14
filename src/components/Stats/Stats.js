@@ -10,7 +10,7 @@ function Stats({ stats }) {
         <img
           src={profileImage}
           alt="Profile"
-          className="w-12/12 h-auto border-l-0 border-r-2 border-b-2 m-auto"
+          className="w-12/12 h-auto border-l-0 border-r-2 border-b-2"
         />
         {stats.map((stat, i) => {
           if (stat[0] === 'id' || stat[0] === 'userid' || stat[0] === 'message')
