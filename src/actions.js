@@ -14,9 +14,11 @@ import {
   LOGOUT,
 } from './constants';
 
+const backendURL = 'https://idol-game.herokuapp.com';
+
 export const getPlayerStats = (userID) => (dispatch) => {
   dispatch({ type: GET_PLAYER_STATS_PENDING });
-  fetch(`http://localhost:3002/profile/${userID}`)
+  fetch(`${backendURL}/profile/${userID}`)
     .then((res) => res.json())
     .then((data) =>
       dispatch({ type: GET_PLAYER_STATS_SUCCESS, payload: data[0] })
@@ -31,7 +33,7 @@ export const performAction = (event) => (dispatch) => {
     action: event.currentTarget.id,
     userID: userID,
   };
-  fetch(`http://localhost:3002/action`, {
+  fetch(`${backendURL}/action`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
@@ -49,7 +51,7 @@ export const performAction = (event) => (dispatch) => {
 export const login = (username, password) => (dispatch) => {
   const data = { username, password };
   dispatch({ type: LOGIN_PENDING });
-  fetch('http://localhost:3002/login', {
+  fetch(`${backendURL}/login`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
@@ -73,7 +75,7 @@ export const login = (username, password) => (dispatch) => {
 export const register = (playerName, username, password) => (dispatch) => {
   dispatch({ type: REGISTER_PENDING });
   const data = { name: playerName, username, password };
-  fetch('http://localhost:3002/register', {
+  fetch(`${backendURL}/register`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',

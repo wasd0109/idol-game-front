@@ -30,7 +30,7 @@ function Actions(props) {
   );
   useEffect(() => {
     if (coolDown) {
-      const btnList = document.querySelectorAll('button');
+      const btnList = document.querySelectorAll('.action-button');
       btnList.forEach((btn) => btn.setAttribute('disabled', ''));
       timer > 0 && setTimeout(() => setTimer(timer - 1000), 1000);
       if (!timer) {
@@ -66,7 +66,7 @@ function Actions(props) {
       </div>
       <div id="actions" className="flex justify-evenly my-2">
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
+          className="action-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
           id="practice"
           onClick={(event) => {
             performAction(event);
@@ -77,7 +77,7 @@ function Actions(props) {
           Practice
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded w-2/12"
+          className="action-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded w-2/12"
           id="live"
           onClick={(event) => {
             performAction(event);
@@ -88,7 +88,7 @@ function Actions(props) {
           Live
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
+          className="action-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
           id="tsunagari"
           onClick={(event) => {
             performAction(event);
@@ -99,7 +99,7 @@ function Actions(props) {
           Tsunagari
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
+          className="action-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded w-2/12"
           id="tweet"
           onClick={(event) => {
             performAction(event);
