@@ -27,23 +27,16 @@ const mapDispatchToProps = (dispatch) => {
 
 const generateNavBarButton = (name, link) => (
   <Link
+    key={name}
     to={link}
-    className="transition duration-500 hover:bg-white h-full pt-2 pr-2"
+    className="transition duration-500 hover:bg-white h-full pt-4 pr-2"
   >
     <p className="text-lg font-medium">{name}</p>
   </Link>
 );
 
 function App(props) {
-  const {
-    getPlayerStats,
-    player,
-    username,
-    userID,
-    loggedIn,
-    logout,
-    currentLocation,
-  } = props;
+  const { getPlayerStats, player, username, userID, loggedIn, logout } = props;
   useEffect(() => {
     if (loggedIn) {
       getPlayerStats(userID);
@@ -67,7 +60,7 @@ function App(props) {
         )}
         <Link
           to="/"
-          className="transition duration-500 hover:bg-white h-full pt-2 px-2 mr-1 ml-auto"
+          className="transition duration-500 hover:bg-white h-full pt-4 px-2 mr-1 ml-auto"
           onClick={logout}
         >
           <p className="text-lg font-medium">Logout</p>

@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import { useLocation } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';

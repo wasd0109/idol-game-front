@@ -21,35 +21,29 @@ const mapDispatchToProps = (dispatch) => {
 
 function Actions(props) {
   const { actionResults, performAction, userID } = props;
-  const countdownSecond = process.env.NODE_ENV === 'development' ? 2000 : 60000;
-  const [coolDown, setCoolDown] = useState(
-    Boolean(Number(localStorage.getItem('cooldown'))) || false
-  );
+  const coolDownTime = process.env.NODE_ENV === 'development' ? 2000 : 60000;
   const [timer, setTimer] = useState(
-    Number(localStorage.getItem('timer')) || countdownSecond
+    Number(localStorage.getItem('timer')) || coolDownTime
   );
   useEffect(() => {
-    if (coolDown) {
+    if (timer) {
       const btnList = document.querySelectorAll('.action-button');
       timer > 0 && setTimeout(() => setTimer(timer - 1000), 1000);
       if (!timer) {
-        setCoolDown(false);
-        setTimer(countdownSecond);
         btnList.forEach((btn) => btn.removeAttribute('disabled'));
         localStorage.removeItem('timer');
-        localStorage.removeItem('cooldown');
       }
     }
     localStorage.setItem('timer', String(timer));
-    localStorage.setItem('cooldown', String(Number(coolDown)));
-  }, [timer, coolDown, countdownSecond]);
+  }, [timer, coolDownTime]);
+
   useEffect(() => {
     const performed = document.querySelector('#performed');
     performed.scrollTop = performed.scrollHeight;
   }, [actionResults]);
 
-  const coolDownTimer = () => {
-    setCoolDown(true);
+  const startCoolDown = () => {
+    setTimer(coolDownTime);
     const btnList = document.querySelectorAll('.action-button');
     btnList.forEach((btn) => btn.setAttribute('disabled', ''));
   };
@@ -72,7 +66,7 @@ function Actions(props) {
           id="practice"
           onClick={(event) => {
             performAction(event);
-            coolDownTimer();
+            startCoolDown();
           }}
           value={userID}
         >
@@ -83,7 +77,7 @@ function Actions(props) {
           id="live"
           onClick={(event) => {
             performAction(event);
-            coolDownTimer();
+            startCoolDown();
           }}
           value={userID}
         >
@@ -94,7 +88,7 @@ function Actions(props) {
           id="tsunagari"
           onClick={(event) => {
             performAction(event);
-            coolDownTimer();
+            startCoolDown();
           }}
           value={userID}
         >
@@ -105,7 +99,7 @@ function Actions(props) {
           id="tweet"
           onClick={(event) => {
             performAction(event);
-            coolDownTimer();
+            startCoolDown();
           }}
           value={userID}
         >
@@ -113,7 +107,7 @@ function Actions(props) {
         </button>
       </div>
 
-      {coolDown ? (
+      {timer ? (
         <AlertBar msg={`Cooling down, please wait ${timer / 1000} seconds`} />
       ) : (
         <AlertBar msg={'Press button to perform action'} />
