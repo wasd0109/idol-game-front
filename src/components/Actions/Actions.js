@@ -55,7 +55,7 @@ function Actions(props) {
   };
 
   return (
-    <div className="w-full my-2 md:my-0 md:w-7/12 m-auto">
+    <React.Fragment>
       <div id="performed" className="border-2 p-2 overflow-y-scroll capitalize">
         {actionResults.map((action, i) => {
           return action.split('\n').map((line, j) => {
@@ -118,7 +118,7 @@ function Actions(props) {
       ) : (
         <AlertBar msg={'Press button to perform action'} />
       )}
-    </div>
+    </React.Fragment>
   );
 }
 

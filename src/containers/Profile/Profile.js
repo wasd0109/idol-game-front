@@ -26,8 +26,12 @@ function Profile({ player }) {
 
   return (
     <div className="flex mx-4 my-2 flex-wrap">
-      <Stats stats={stats} />
-      <Actions />
+      <div className="md:w-4/12 xl:w-3/12 h-auto" id="stats">
+        <Stats stats={stats} />
+      </div>
+      <div className="w-full my-2 md:my-0 md:w-7/12 m-auto">
+        <Actions />
+      </div>
     </div>
   );
 }
