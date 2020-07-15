@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Actions.css';
 import { connect } from 'react-redux';
-
+import AlertBar from '../AlertBar';
 import { performAction } from '../../actions';
 
 const mapStateToProps = (state) => {
@@ -43,6 +43,10 @@ function Actions(props) {
     localStorage.setItem('timer', String(timer));
     localStorage.setItem('cooldown', String(Number(coolDown)));
   }, [timer, coolDown, countdownSecond]);
+  useEffect(() => {
+    const performed = document.querySelector('#performed');
+    performed.scrollTop = performed.scrollHeight;
+  }, [actionResults]);
 
   const coolDownTimer = () => {
     setCoolDown(true);
@@ -55,11 +59,7 @@ function Actions(props) {
       <div id="performed" className="border-2 p-2 overflow-y-scroll capitalize">
         {actionResults.map((action, i) => {
           return action.split('\n').map((line, j) => {
-            return (
-              <h1 key={i + j} className="">
-                {line}
-              </h1>
-            );
+            return <h1 key={i + j}>{line}</h1>;
           });
         })}
       </div>
@@ -112,16 +112,12 @@ function Actions(props) {
           Tweet
         </button>
       </div>
-      <div
-        className="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3"
-        role="alert"
-      >
-        {coolDown ? (
-          <p>Cooling down, please wait {timer / 1000} seconds</p>
-        ) : (
-          <p>Press to perform action</p>
-        )}
-      </div>
+
+      {coolDown ? (
+        <AlertBar msg={`Cooling down, please wait ${timer / 1000} seconds`} />
+      ) : (
+        <AlertBar msg={'Press button to perform action'} />
+      )}
     </div>
   );
 }
