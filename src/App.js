@@ -25,8 +25,25 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const generateNavBarButton = (name, link) => (
+  <Link
+    to={link}
+    className="transition duration-500 hover:bg-white h-full pt-2 pr-2"
+  >
+    <p className="text-lg font-medium">{name}</p>
+  </Link>
+);
+
 function App(props) {
-  const { getPlayerStats, player, username, userID, loggedIn, logout } = props;
+  const {
+    getPlayerStats,
+    player,
+    username,
+    userID,
+    loggedIn,
+    logout,
+    currentLocation,
+  } = props;
   useEffect(() => {
     if (loggedIn) {
       getPlayerStats(userID);
@@ -35,51 +52,28 @@ function App(props) {
       localStorage.setItem('loggedIn', loggedIn);
     }
   }, [userID, loggedIn, username, getPlayerStats]);
-  if (!loggedIn) {
-    return (
-      <Suspense
-        fallback={
-          <div className="flex justify-center mt-24">
-            <Loader type="TailSpin" color="#00BFFF" height={200} width={200} />
-          </div>
-        }
-      >
-        <Router>
-          <Switch>
-            <Route path="/register">
-              <LazyRegister />
-            </Route>
-            <Route path="/">
-              <Login />
-            </Route>
-          </Switch>
-        </Router>
-      </Suspense>
-    );
-  }
-  return (
+
+  const navBarContent = [
+    ['Home', '/'],
+    ['Player List', '/players'],
+    ['Battle', '/battle'],
+    ['Setting', '/setting'],
+  ];
+  return loggedIn ? (
     <Router>
+      <nav className="flex flex-wrap bg-blue-300 pl-4" id="navbar">
+        {navBarContent.map((button) =>
+          generateNavBarButton(button[0], button[1])
+        )}
+        <Link
+          to="/"
+          className="transition duration-500 hover:bg-white h-full pt-2 px-2 mr-1 ml-auto"
+          onClick={logout}
+        >
+          <p className="text-lg font-medium">Logout</p>
+        </Link>
+      </nav>
       <div>
-        <nav className="flex flex-wrap bg-blue-300 p-4" id="navbar">
-          <Link to="/" className="pr-2">
-            Home
-          </Link>
-
-          <Link to="/players" className="pr-2">
-            Player List
-          </Link>
-          <Link to="/" className="ml-auto">
-            <button
-              onClick={() => {
-                localStorage.clear();
-                logout();
-              }}
-            >
-              Log Out
-            </button>
-          </Link>
-        </nav>
-
         <Switch>
           <Route path="/">
             <Profile player={player} />
@@ -87,6 +81,25 @@ function App(props) {
         </Switch>
       </div>
     </Router>
+  ) : (
+    <Suspense
+      fallback={
+        <div className="flex justify-center mt-24">
+          <Loader type="TailSpin" color="#00BFFF" height={200} width={200} />
+        </div>
+      }
+    >
+      <Router>
+        <Switch>
+          <Route path="/register">
+            <LazyRegister />
+          </Route>
+          <Route path="/">
+            <Login />
+          </Route>
+        </Switch>
+      </Router>
+    </Suspense>
   );
 }
 
