@@ -5,10 +5,11 @@ import {
   // GET_PLAYER_STATS_PENDING,
   GET_PLAYER_STATS_SUCCESS,
   // GET_PLAYER_STATS_FAILED,
-  // LOGIN_PENDING,
+  LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOGOUT,
+  REGISTER_PENDING,
   REGISTER_SUCCESS,
   REGISTER_FAILED,
 } from './constants';
@@ -92,6 +93,7 @@ export const logUserIn = (state = initialUser, action = {}) => {
 
 const initialError = {
   isError: false,
+  errorMessage: '',
 };
 
 export const triggerError = (state = initialError, action = {}) => {
@@ -100,7 +102,10 @@ export const triggerError = (state = initialError, action = {}) => {
     case REGISTER_FAILED:
       return Object.assign({}, state, {
         isError: true,
+        errorMessage: action.payload,
       });
+    case LOGIN_PENDING:
+    case REGISTER_PENDING:
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
       return { ...state, isError: false };

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions';
-import ErrorBar from '../ErrorBar/index';
+import ErrorBar from '../ErrorBar';
+import AlertBar from '../AlertBar';
 
 const mapStateToProps = (state) => {
-  return { isError: state.triggerError.isError };
+  return {
+    isError: state.triggerError.isError,
+    errorMessage: state.triggerError.errorMessage,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -16,7 +20,8 @@ const mapDispatchToProps = (dispatch) => {
 function Login(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { onSubmit, isError } = props;
+  const [signingIn, setSigningIn] = useState(false);
+  const { onSubmit, isError, errorMessage } = props;
   return (
     <div className="flex justify-center mt-4 md:mt-16">
       <div className="w-full max-w-xs">
@@ -37,15 +42,15 @@ function Login(props) {
               onChange={(event) => setUsername(event.target.value)}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-sm font-bold mb-2 "
               htmlFor="password"
             >
               Password
             </label>
             <input
-              className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="******************"
@@ -53,14 +58,16 @@ function Login(props) {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
-          {isError ? <ErrorBar msg={'Wrong username or password'} /> : null}
-          <div className="flex items-center justify-between">
+          {isError ? <ErrorBar msg={errorMessage} /> : null}
+          {signingIn && !isError ? <AlertBar msg="Signing in" /> : null}
+          <div className="flex items-center justify-between mt-4">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
               onClick={(event) => {
                 event.preventDefault();
                 onSubmit(username, password);
+                setSigningIn(true);
               }}
             >
               Sign In

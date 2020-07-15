@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { register } from '../../actions';
+import ErrorBar from '../ErrorBar/index';
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  return {
+    isError: state.triggerError.isError,
+    errorMessage: state.triggerError.errorMessage,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -17,7 +21,7 @@ function Register(props) {
   const [username, setUsername] = useState('');
   const [playerName, setPlayerName] = useState('');
   const [password, setPassword] = useState('');
-  const { onSubmit } = props;
+  const { onSubmit, isError, errorMessage } = props;
   return (
     <div className="flex justify-center mt-4 md:mt-16">
       <div className="w-full max-w-xs">
@@ -54,15 +58,15 @@ function Register(props) {
               onChange={(event) => setUsername(event.target.value)}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-sm font-bold mb-2 "
               htmlFor="password"
             >
               Password
             </label>
             <input
-              className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="******************"
@@ -70,7 +74,8 @@ function Register(props) {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
-          <div className="flex items-center justify-between">
+          {isError ? <ErrorBar msg={errorMessage} /> : null}
+          <div className="flex items-center justify-between mt-4">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"

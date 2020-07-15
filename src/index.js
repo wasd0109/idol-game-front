@@ -31,10 +31,10 @@ const rootReducer = (state, action) => {
   return appReducer(state, action);
 };
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunkMiddleware, logger)
-);
+const store =
+  process.env.NODE_ENV === 'production'
+    ? createStore(rootReducer, applyMiddleware(thunkMiddleware))
+    : createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 ReactDOM.render(
   <React.StrictMode>

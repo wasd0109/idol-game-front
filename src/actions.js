@@ -49,6 +49,11 @@ export const performAction = (event) => (dispatch) => {
 };
 
 export const login = (username, password) => (dispatch) => {
+  if (!username || !password)
+    return dispatch({
+      type: LOGIN_FAILED,
+      payload: 'Please enter all information',
+    });
   const data = { username, password };
   dispatch({ type: LOGIN_PENDING });
   fetch(`${backendURL}/login`, {
@@ -61,18 +66,24 @@ export const login = (username, password) => (dispatch) => {
     .then((res) => res.json())
     .then((data) => {
       if (data.id) {
-        dispatch({
+        return dispatch({
           type: LOGIN_SUCCESS,
           payload: { username: data.username, userID: data.id, loggedIn: true },
         });
-      } else {
-        dispatch({ type: LOGIN_FAILED });
       }
+      dispatch({ type: LOGIN_FAILED, payload: 'Wrong username/password' });
     })
-    .catch(() => dispatch({ type: LOGIN_FAILED }));
+    .catch(() =>
+      dispatch({ type: LOGIN_FAILED, payload: 'Something went wrong' })
+    );
 };
 
 export const register = (playerName, username, password) => (dispatch) => {
+  if (!playerName || !username || !password)
+    return dispatch({
+      type: REGISTER_FAILED,
+      payload: 'Please enter all information',
+    });
   dispatch({ type: REGISTER_PENDING });
   const data = { name: playerName, username, password };
   fetch(`${backendURL}/register`, {
@@ -86,14 +97,18 @@ export const register = (playerName, username, password) => (dispatch) => {
     .then((data) => {
       const { id, username } = data[0];
       if (id) {
-        dispatch({
+        return dispatch({
           type: REGISTER_SUCCESS,
           payload: { userID: id, username, loggedIn: true },
         });
       }
+      return dispatch({
+        type: REGISTER_FAILED,
+        payload: 'Username/Player Name already existed',
+      });
     })
     .catch((err) => {
-      dispatch({ type: REGISTER_FAILED, payload: err });
+      dispatch({ type: REGISTER_FAILED, payload: 'Something went wrong' });
     });
 };
 

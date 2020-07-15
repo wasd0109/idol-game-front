@@ -31,14 +31,13 @@ function Actions(props) {
   useEffect(() => {
     if (coolDown) {
       const btnList = document.querySelectorAll('.action-button');
-      btnList.forEach((btn) => btn.setAttribute('disabled', ''));
       timer > 0 && setTimeout(() => setTimer(timer - 1000), 1000);
       if (!timer) {
         setCoolDown(false);
         setTimer(countdownSecond);
         btnList.forEach((btn) => btn.removeAttribute('disabled'));
-        localStorage.setItem('timer', String(timer));
-        localStorage.setItem('cooldown', String(Number(coolDown)));
+        localStorage.removeItem('timer');
+        localStorage.removeItem('cooldown');
       }
     }
     localStorage.setItem('timer', String(timer));
@@ -47,6 +46,8 @@ function Actions(props) {
 
   const coolDownTimer = () => {
     setCoolDown(true);
+    const btnList = document.querySelectorAll('.action-button');
+    btnList.forEach((btn) => btn.setAttribute('disabled', ''));
   };
 
   return (
@@ -89,7 +90,7 @@ function Actions(props) {
           Live
         </button>
         <button
-          className="action-button text-lg bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  md:px-2 rounded w-5/12 mt-2 md:m-0 md:w-2/12"
+          className="action-button  bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  md:px-2 rounded w-5/12 mt-2 md:m-0 md:w-2/12"
           id="tsunagari"
           onClick={(event) => {
             performAction(event);

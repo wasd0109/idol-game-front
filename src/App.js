@@ -39,13 +39,9 @@ function App(props) {
     return (
       <Suspense
         fallback={
-          <Loader
-            type="TailSpin"
-            color="#00BFFF"
-            height={200}
-            width={200}
-            timeout={5000}
-          />
+          <div className="flex justify-center mt-24">
+            <Loader type="TailSpin" color="#00BFFF" height={200} width={200} />
+          </div>
         }
       >
         <Router>
