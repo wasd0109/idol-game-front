@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { getPlayerStats, logout } from './actions';
 import Profile from './containers/Profile';
 import Login from './components/Login';
+import Loader from 'react-loader-spinner';
 import './output.css';
 import './App.css';
 const LazyRegister = React.lazy(() => import('./components/Register'));
@@ -36,7 +37,17 @@ function App(props) {
   }, [userID, loggedIn, username, getPlayerStats]);
   if (!loggedIn) {
     return (
-      <Suspense fallback={<div>Loading</div>}>
+      <Suspense
+        fallback={
+          <Loader
+            type="TailSpin"
+            color="#00BFFF"
+            height={200}
+            width={200}
+            timeout={5000}
+          />
+        }
+      >
         <Router>
           <Switch>
             <Route path="/register">
