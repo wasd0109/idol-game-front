@@ -1,10 +1,11 @@
 import React, { Suspense, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { getPlayerStats, logout } from './actions';
 import Profile from './containers/Profile';
 import Login from './components/Login';
 import Loader from 'react-loader-spinner';
+import Navbar from './components/Navbar';
 import './output.css';
 import './App.css';
 const LazyRegister = React.lazy(() => import('./components/Register'));
@@ -25,16 +26,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const generateNavBarButton = (name, link) => (
-  <Link
-    key={name}
-    to={link}
-    className="transition duration-500 hover:bg-white h-full pt-4 pr-2"
-  >
-    <p className="text-lg font-medium">{name}</p>
-  </Link>
-);
-
 function App(props) {
   const { getPlayerStats, player, username, userID, loggedIn, logout } = props;
   useEffect(() => {
@@ -46,26 +37,9 @@ function App(props) {
     }
   }, [userID, loggedIn, username, getPlayerStats]);
 
-  const navBarContent = [
-    ['Home', '/'],
-    ['Player List', '/players'],
-    ['Battle', '/battle'],
-    ['Setting', '/setting'],
-  ];
   return loggedIn ? (
     <Router>
-      <nav className="flex flex-wrap bg-blue-300 pl-4" id="navbar">
-        {navBarContent.map((button) =>
-          generateNavBarButton(button[0], button[1])
-        )}
-        <Link
-          to="/"
-          className="transition duration-500 hover:bg-white h-full pt-4 px-2 mr-1 ml-auto"
-          onClick={logout}
-        >
-          <p className="text-lg font-medium">Logout</p>
-        </Link>
-      </nav>
+      <Navbar logout={logout} />
       <div>
         <Switch>
           <Route path="/">
