@@ -1,10 +1,11 @@
 import React, { Suspense, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { getPlayerStats, logout } from './actions';
 import Profile from './containers/Profile';
 import Login from './components/Login';
 import Loader from 'react-loader-spinner';
+import Navbar from './components/Navbar';
 import './output.css';
 import './App.css';
 const LazyRegister = React.lazy(() => import('./components/Register'));
@@ -35,51 +36,11 @@ function App(props) {
       localStorage.setItem('loggedIn', loggedIn);
     }
   }, [userID, loggedIn, username, getPlayerStats]);
-  if (!loggedIn) {
-    return (
-      <Suspense
-        fallback={
-          <div className="flex justify-center mt-24">
-            <Loader type="TailSpin" color="#00BFFF" height={200} width={200} />
-          </div>
-        }
-      >
-        <Router>
-          <Switch>
-            <Route path="/register">
-              <LazyRegister />
-            </Route>
-            <Route path="/">
-              <Login />
-            </Route>
-          </Switch>
-        </Router>
-      </Suspense>
-    );
-  }
-  return (
+
+  return loggedIn ? (
     <Router>
+      <Navbar logout={logout} />
       <div>
-        <nav className="flex flex-wrap bg-blue-300 p-4" id="navbar">
-          <Link to="/" className="pr-2">
-            Home
-          </Link>
-
-          <Link to="/players" className="pr-2">
-            Player List
-          </Link>
-          <Link to="/" className="ml-auto">
-            <button
-              onClick={() => {
-                localStorage.clear();
-                logout();
-              }}
-            >
-              Log Out
-            </button>
-          </Link>
-        </nav>
-
         <Switch>
           <Route path="/">
             <Profile player={player} />
@@ -87,6 +48,25 @@ function App(props) {
         </Switch>
       </div>
     </Router>
+  ) : (
+    <Suspense
+      fallback={
+        <div className="flex justify-center mt-24">
+          <Loader type="TailSpin" color="#00BFFF" height={200} width={200} />
+        </div>
+      }
+    >
+      <Router>
+        <Switch>
+          <Route path="/register">
+            <LazyRegister />
+          </Route>
+          <Route path="/">
+            <Login />
+          </Route>
+        </Switch>
+      </Router>
+    </Suspense>
   );
 }
 
