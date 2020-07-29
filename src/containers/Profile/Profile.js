@@ -1,6 +1,6 @@
 import React from 'react';
 import Stats from '../../components/Stats';
-import Actions from '../../components/Actions';
+import ActionsContainer from '../../containers/ActionsContainer';
 import Loader from 'react-loader-spinner';
 
 function Profile({ player }) {
@@ -26,7 +26,7 @@ function Profile({ player }) {
         <Stats player={player} />
       </div>
       <div className="w-full my-2 md:my-0 md:w-7/12 m-auto">
-        <Actions />
+        <ActionsContainer />
       </div>
     </div>
   );

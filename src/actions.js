@@ -26,11 +26,10 @@ export const getPlayerStats = (userID) => (dispatch) => {
     .catch(() => dispatch({ type: GET_PLAYER_STATS_FAILED }));
 };
 
-export const performAction = (event) => (dispatch) => {
+export const performAction = (userID, action) => (dispatch) => {
   dispatch({ type: ACTION_PENDING });
-  const userID = event.currentTarget.value;
   const data = {
-    action: event.currentTarget.id,
+    action: action,
     userID: userID,
   };
   fetch(`${backendURL}/action`, {
