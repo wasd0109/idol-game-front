@@ -19,11 +19,15 @@ function Profile({ player }) {
       </div>
     );
   }
-
+  const stats = [];
+  const hiddenInfo = ['id', 'userid', 'message'];
+  for (const [key, value] of Object.entries(player)) {
+    if (!hiddenInfo.includes(key)) stats.push([key.replace('_', ' '), value]);
+  }
   return (
     <div className="flex mx-4 my-2 flex-wrap">
       <div className="md:w-4/12 xl:w-3/12 h-auto" id="stats">
-        <Stats player={player} />
+        <Stats stats={stats} />
       </div>
       <div className="w-full my-2 md:my-0 md:w-7/12 m-auto">
         <ActionsContainer />

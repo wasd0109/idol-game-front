@@ -16,7 +16,6 @@ Object {
         <button
           class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
           id="Practice"
-          role="Practice"
           value="0"
         >
           <p
@@ -28,7 +27,6 @@ Object {
         <button
           class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
           id="Live"
-          role="Live"
           value="0"
         >
           <p
@@ -40,7 +38,6 @@ Object {
         <button
           class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
           id="Tsunagari"
-          role="Tsunagari"
           value="0"
         >
           <p
@@ -52,7 +49,6 @@ Object {
         <button
           class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
           id="Tweet"
-          role="Tweet"
           value="0"
         >
           <p
@@ -82,7 +78,6 @@ Object {
       <button
         class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
         id="Practice"
-        role="Practice"
         value="0"
       >
         <p
@@ -94,7 +89,6 @@ Object {
       <button
         class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
         id="Live"
-        role="Live"
         value="0"
       >
         <p
@@ -106,7 +100,6 @@ Object {
       <button
         class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
         id="Tsunagari"
-        role="Tsunagari"
         value="0"
       >
         <p
@@ -118,7 +111,6 @@ Object {
       <button
         class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
         id="Tweet"
-        role="Tweet"
         value="0"
       >
         <p

@@ -20,6 +20,7 @@ function Navbar({ logout }) {
   ];
 
   return (
+
     <nav className="flex flex-wrap bg-blue-300 pl-4" id="navbar">
       {navBarContent.map((button) =>
         generateNavBarButton(button[0], button[1])
@@ -32,6 +33,7 @@ function Navbar({ logout }) {
         <p className="text-lg font-medium">Logout</p>
       </Link>
     </nav>
+
   );
 }
 

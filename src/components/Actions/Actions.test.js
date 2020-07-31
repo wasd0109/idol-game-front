@@ -1,24 +1,24 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import Action from './Actions';
-import fetchMock from 'jest-fetch-mock';
+import { render, fireEvent, screen } from '@testing-library/react';
+import Actions from './Actions';
 
-let container;
-const props = {
+let component;
+const initialProps = {
   actionResults: [],
   userID: '0',
   performAction: jest.fn(),
+  actions: ['Practice', 'Live', 'Tsunagari', 'Tweet'],
 };
 
 beforeEach(() => {
-  container = render(<Action {...props} />);
+  component = render(<Actions {...initialProps} />);
 });
 
 const actions = ['Practice', 'Live', 'Tsunagari', 'Tweet'];
 
 describe('Action component render as expected', () => {
   test('render Action component', () => {
-    expect(container).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
   test('Render action results as expected', () => {
     const props = {
@@ -26,35 +26,39 @@ describe('Action component render as expected', () => {
       userID: '0',
       performAction: jest.fn(),
     };
-    const container = render(<Action {...props} />);
-    expect(container.getByText('Test 1'));
-    expect(container.getByText('Test 2'));
-    expect(container.getByText('Test 3'));
+    const component = render(<Actions {...props} actions={actions} />);
+    expect(component.getByText('Test 1')).toBeInTheDocument();
+    expect(component.getByText('Test 2')).toBeInTheDocument();
+    expect(component.getByText('Test 3')).toBeInTheDocument();
   });
 });
 
 describe('Action component function as expected', () => {
   test('Pressing action button results in action', () => {
     const actionType = 'Practice';
-    const actionBtn = screen.getByRole(actionType);
+    const actionBtn = screen.getByText(actionType);
     fireEvent.click(actionBtn);
-    expect(props.performAction).toBeCalled();
+    expect(initialProps.performAction).toBeCalled();
   });
   test.each(actions)('Action to be called with %s type', (action) => {
-    const actionBtn = screen.getByRole(action);
+    const actionBtn = screen.getByText(action);
     fireEvent.click(actionBtn);
-    expect(props.performAction).toBeCalledWith(props.userID, action);
+    expect(initialProps.performAction).toBeCalledWith(
+      initialProps.userID,
+      action
+    );
   });
   test('Triggering action results in cool down', () => {
     const actionType = 'Practice';
-    const actionBtn = screen.getByRole(actionType);
+    const actionBtn = screen.getByText(actionType);
     fireEvent.click(actionBtn);
     expect(screen.getByText(/Cooling down/i));
-    expect(screen.getByRole(actionType)).toHaveAttribute('disabled');
+
+    expect(screen.getByText(actionType).parentElement).toHaveAttribute('disabled');
   });
   test('Cool down end after timer run out', () => {
     const actionType = 'Practice';
-    const actionBtn = screen.getByRole(actionType);
+    const actionBtn = screen.getByText(actionType);
     fireEvent.click(actionBtn);
     screen.findByText('Press button to perform action');
   });

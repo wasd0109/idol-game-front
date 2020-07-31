@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Actions.css';
 import AlertBar from '../AlertBar';
 
-function Actions(props) {
-  const { actionResults, performAction, userID } = props;
+function Actions({ actionResults, performAction, userID, actions }) {
   const coolDownTime =
     process.env.NODE_ENV === 'development' ||
-    process.env.JEST_WORKER_ID !== undefined
+      process.env.JEST_WORKER_ID !== undefined
       ? 2000
       : 60000;
   const [timer, setTimer] = useState(
@@ -33,7 +32,6 @@ function Actions(props) {
     setTimer(coolDownTime);
   };
 
-  const actions = ['Practice', 'Live', 'Tsunagari', 'Tweet'];
   const actionBar = actions.map((action) => (
     <button
       key={action}
@@ -44,7 +42,6 @@ function Actions(props) {
         startCoolDown();
       }}
       value={userID}
-      role={action}
     >
       <p className="text-white font-bold">{action}</p>
     </button>
@@ -68,8 +65,8 @@ function Actions(props) {
       {timer ? (
         <AlertBar msg={`Cooling down, please wait ${timer / 1000} seconds`} />
       ) : (
-        <AlertBar msg={'Press button to perform action'} />
-      )}
+          <AlertBar msg={'Press button to perform action'} />
+        )}
     </React.Fragment>
   );
 }

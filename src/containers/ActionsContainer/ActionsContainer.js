@@ -19,7 +19,8 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 function ActionsContainer(props) {
-  return <Actions {...props} />;
+  const actions = ['Practice', 'Live', 'Tsunagari', 'Tweet'];
+  return <Actions {...props} actions={actions} />;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionsContainer);
