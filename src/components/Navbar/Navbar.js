@@ -11,16 +11,8 @@ const generateNavBarButton = (name, link) => (
   </Link>
 );
 
-function Navbar({ onLogout }) {
-  const navBarContent = [
-    ['Home', '/'],
-    ['Player List', '/players'],
-    ['Battle', '/battle'],
-    ['Setting', '/setting'],
-  ];
-
+function Navbar({ onLogout, navBarContent }) {
   return (
-
     <nav className="flex flex-wrap bg-blue-300 pl-4" id="navbar">
       {navBarContent.map((button) =>
         generateNavBarButton(button[0], button[1])

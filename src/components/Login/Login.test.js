@@ -1,12 +1,8 @@
 import React from 'react';
-import { render, waitFor, waitForElementToBeRemoved, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import fetchMock from 'jest-fetch-mock';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Login from './Login';
-import { act } from 'react-dom/test-utils';
-
-
 
 let component;
 

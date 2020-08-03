@@ -4,17 +4,19 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import Navbar from './Navbar';
 
-const initialProps = {
-    onLogout: jest.fn(),
-};
-
 const navBarContent = [
     ['Home', '/'],
     ['Player List', '/players'],
     ['Battle', '/battle'],
     ['Setting', '/setting'],
-    ["Logout", "/"]
 ]
+
+const initialProps = {
+    onLogout: jest.fn(),
+    navBarContent,
+};
+
+
 
 let component;
 
@@ -27,7 +29,6 @@ describe('Navbar component render correctly', () => {
 
         expect(component).toMatchSnapshot();
     });
-
 
     test.each(navBarContent)("Navbar render correct link", (linkName, linkRef) => {
         expect(screen.getByText(linkName)).toBeInTheDocument();

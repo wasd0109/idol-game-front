@@ -33,6 +33,7 @@ function Actions({ actionResults, performAction, userID, actions }) {
   };
 
   const actionBar = actions.map((action) => (
+
     <button
       key={action}
       className="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"

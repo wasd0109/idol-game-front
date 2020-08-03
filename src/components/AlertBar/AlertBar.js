@@ -3,7 +3,7 @@ import React from 'react';
 function AlertBar({ msg }) {
   return (
     <div
-      className="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3"
+      className="items-center bg-blue-500 text-white font-semibold px-4 py-3 rounded"
       role="alert"
     >
       {msg}

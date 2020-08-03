@@ -44,7 +44,7 @@ function Login({ onSubmit, error, resetError }) {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
-          <div className="flex items-center justify-between mt-2">
+          <div className="flex items-center justify-between mt-4">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"

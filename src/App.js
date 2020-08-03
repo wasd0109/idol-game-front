@@ -1,25 +1,24 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Profile from './containers/Profile';
+import MainPage from './containers/MainPage';
 import Login from './components/Login';
 import Loader from 'react-loader-spinner';
-import Navbar from './components/Navbar';
 import './output.css';
 import './App.css';
 const LazyRegister = React.lazy(() => import('./components/Register'));
 
 
-function App(props) {
+function App() {
   const initialUser = {
     username: localStorage.getItem('username')
       ? localStorage.getItem('username')
       : '',
     userID: localStorage.getItem('userID') ? localStorage.getItem('userID') : "0",
   }
-  const { logout } = props;
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn')
     ? localStorage.getItem('loggedIn')
     : false);
+
   const [user, setUser] = useState(initialUser);
 
   const { username, userID } = user;
@@ -35,13 +34,6 @@ function App(props) {
     }
   }, [userID, loggedIn, username]);
 
-  const handleLogin = (username, id) => {
-    if (username || id) {
-      setUser({ username: username, userID: id });
-      setLoggedIn(true);
-    }
-  }
-
   const [error, setError] = useState(undefined);
 
   const onSubmit = (username, password, playerName = undefined) => {
@@ -56,7 +48,10 @@ function App(props) {
       body: JSON.stringify(data),
     }).then((res) => res.json()).then(data => {
       const { username, id } = data;
-      if (username && id) handleLogin(username, id)
+      if (username && id) {
+        setUser({ username: username, userID: id });
+        setLoggedIn(true);
+      }
       else setError(data)
     }).catch((error) => setError(error))
   }
@@ -65,21 +60,9 @@ function App(props) {
     setError(null);
   }
 
-  const onLogout = () => {
-    setLoggedIn(!loggedIn);
-  }
 
   return loggedIn ? (
-    <Router>
-      <Navbar onLogout={onLogout} />
-      <div>
-        <Switch>
-          <Route path="/">
-            <Profile userID={userID} />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <MainPage userID={userID} setLoggedIn={setLoggedIn} />
   ) : (
       <Suspense
         fallback={
