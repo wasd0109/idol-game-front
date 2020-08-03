@@ -1,7 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { getPlayerStats, logout } from './actions';
 import Profile from './containers/Profile';
 import Login from './components/Login';
 import Loader from 'react-loader-spinner';
@@ -10,21 +8,6 @@ import './output.css';
 import './App.css';
 const LazyRegister = React.lazy(() => import('./components/Register'));
 
-const mapStateToProps = (state) => {
-  return {
-    // player: state.setPlayerStats.player,
-    // username: state.logUserIn.username,
-    // userID: state.logUserIn.userID,
-    // loggedIn: state.logUserIn.loggedIn,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getPlayerStats: (userID) => dispatch(getPlayerStats(userID)),
-    // logout: () => dispatch(logout()),
-  };
-};
 
 function App(props) {
   const initialUser = {
@@ -60,12 +43,11 @@ function App(props) {
   }
 
   const [error, setError] = useState(undefined);
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  const onSubmit = (username, password,playerName=undefined) => {
-    setIsLoggingIn(!isLoggingIn);
-    const data =playerName?{username,password,playerName}: { username, password };
-    const url = playerName?'https://idol-game.herokuapp.com/register':'https://idol-game.herokuapp.com/login';
+  const onSubmit = (username, password, playerName = undefined) => {
+    setError(null);
+    const data = playerName ? { username, password, playerName } : { username, password };
+    const url = playerName ? 'https://idol-game.herokuapp.com/register' : 'https://idol-game.herokuapp.com/login';
     fetch(url, {
       method: 'post',
       headers: {
@@ -77,10 +59,13 @@ function App(props) {
       if (username && id) handleLogin(username, id)
       else setError(data)
     }).catch((error) => setError(error))
-    setIsLoggingIn(!isLoggingIn);
   }
 
-  const onLogout=()=>{
+  const resetError = () => {
+    setError(null);
+  }
+
+  const onLogout = () => {
     setLoggedIn(!loggedIn);
   }
 
@@ -106,10 +91,10 @@ function App(props) {
         <Router>
           <Switch>
             <Route path="/register">
-              <LazyRegister onSubmit={onSubmit} isLoggingIn={isLoggingIn} error={error} />
+              <LazyRegister onSubmit={onSubmit} error={error} resetError={resetError} />
             </Route>
             <Route path="/">
-              <Login onSubmit={onSubmit} isLoggingIn={isLoggingIn} error={error} />
+              <Login onSubmit={onSubmit} error={error} resetError={resetError} />
             </Route>
           </Switch>
         </Router>
@@ -117,4 +102,4 @@ function App(props) {
     );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import fetchMock from 'jest-fetch-mock';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Login from './Login';
+import { act } from 'react-dom/test-utils';
 
 
 
@@ -12,7 +13,7 @@ let component;
 const initialProps = {
   onSubmit: jest.fn(),
   error: "",
-  isLoggingIn: false
+  resetError: jest.fn(),
 };
 
 beforeEach(() => {
@@ -26,25 +27,13 @@ describe('Login component render correctly', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('Login render logging in message correctly', async () => {
-    const props = {
-      onSubmit: jest.fn(),
-      error: "",
-      isLoggingIn: true
-    };
-    component = render(
-      <Router><Login {...props} /></Router>
-    );
-    expect(screen.getByText("Logging in")).toBeInTheDocument();
-  });
-
   test('Login render error correctly', async () => {
     const props = {
       onSubmit: jest.fn(),
       error: "Error",
-      isLoggingIn: false
+      resetError: jest.fn()
     };
-    component = render(
+    render(
       <Router><Login {...props} /></Router>
     );
     expect(screen.getByText(props.error)).toBeInTheDocument();
@@ -54,6 +43,7 @@ describe('Login component render correctly', () => {
 describe('Login component function correctly', () => {
   test("Link to register functional", () => {
     userEvent.click(screen.getByText("Register"));
+    expect(initialProps.resetError).toBeCalled();
     expect(document.URL).toEqual("http://localhost/register");
   })
 
@@ -67,12 +57,13 @@ describe('Login component function correctly', () => {
   });
 
   test('Login form submit with correct information', async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     const username = 'Testuser123';
     const password = 'testuser123';
     await userEvent.type(screen.getByLabelText('Username'), username);
     await userEvent.type(screen.getByLabelText('Password'), password);
     userEvent.click(screen.getByText('Login'));
+    expect(screen.getByText("Logging in")).toBeInTheDocument();
     expect(initialProps.onSubmit).toBeCalledWith(username, password)
   });
 });

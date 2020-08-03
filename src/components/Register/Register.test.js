@@ -1,33 +1,24 @@
 import React from 'react';
-import { render, waitFor, screen } from '@testing-library/react';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import fetchMock from 'jest-fetch-mock';
 import Register from './Register';
-import { REGISTER_SUCCESS } from "../../constants";
 
-const mockStore = configureStore([thunk]);
 
 let component;
-let store;
 
 const initialProps = {
-    triggerError: {
-        isError: false,
-        errorMessage: '',
-    },
     onSubmit: jest.fn(),
+    error: "",
+    isLoggingIn: false,
+    resetError: jest.fn(),
 };
 
 beforeEach(() => {
-    store = mockStore(initialProps);
     component = render(
-        <Router><Provider store={store}>
-            <Register />
-        </Provider></Router>
+        <Router>
+            <Register {...initialProps} />
+        </Router>
     );
 });
 
@@ -38,24 +29,24 @@ describe('Register component render correctly', () => {
 
     test('Register render error correctly', () => {
         const props = {
-            triggerError: {
-                isError: true,
-                errorMessage: 'Test message',
-            },
+            onSubmit: jest.fn(),
+            error: "Error",
+            isLoggingIn: false,
+            resetError: jest.fn(),
         };
-        const store = mockStore(props);
         const { getByText } = render(
-            <Router><Provider store={store}>
-                <Register />
-            </Provider></Router>
+            <Router>
+                <Register {...props} />
+            </Router>
         );
-        expect(getByText(props.triggerError.errorMessage)).toBeInTheDocument();
+        expect(getByText(props.error)).toBeInTheDocument();
     });
 });
 
 describe('Register component function correctly', () => {
     test("Link to login functional", () => {
         userEvent.click(screen.getByText("Login"));
+        expect(initialProps.resetError).toBeCalled();
         expect(document.URL).toEqual("http://localhost/");
     })
 
@@ -76,26 +67,10 @@ describe('Register component function correctly', () => {
         const playerName = "Testuser123";
         const username = 'Testuser123';
         const password = 'testuser123';
-        // Extremely indirect method
-        fetchMock.mockResponse(async (req) => {
-            const data = await req.json();
-            if (data.name === playerName && data.username === username && data.password === password) {
-                store.dispatch({
-                    type: REGISTER_SUCCESS,
-                });
-                return Promise.resolve('Success');
-            }
-            return Promise.reject('Error');
-        });
         await userEvent.type(screen.getByText("Player Name"), playerName)
         await userEvent.type(screen.getByLabelText('Username'), username);
         await userEvent.type(screen.getByLabelText('Password'), password);
         userEvent.click(screen.getByText('Register'));
-        waitFor(() => {
-            const actions = store.getActions();
-            if (actions.length > 1) {
-                expect(actions[1].type).toEqual(REGISTER_SUCCESS);
-            }
-        });
+        expect(initialProps.onSubmit).toBeCalledWith(username, password, playerName)
     });
 });
