@@ -54,11 +54,12 @@ export const receiveActionResults = (
 ) => {
   switch (action.type) {
     case ACTION_SUCCESS:
+      const prevResults = [...state.actionResults];
       if (state.actionResults.length > 15) {
         state.actionResults.shift();
       }
       return Object.assign({}, state, {
-        actionResults: state.actionResults.concat([action.payload]),
+        actionResults: [...prevResults, action.payload],
       });
     default:
       return state;

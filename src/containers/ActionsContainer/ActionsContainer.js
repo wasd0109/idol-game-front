@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { performAction } from '../../actions';
+import { performAction, getPlayerStats } from '../../actions';
 import Actions from '../../components/Actions';
 
 const mapStateToProps = (state) => {
@@ -12,14 +12,21 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    performAction: (userID, action) => {
-      dispatch(performAction(userID, action));
-    },
+    performAction: (userID, action) =>
+      dispatch(performAction(userID, action))
+    ,
+    getPlayerStats: (userID) => dispatch(getPlayerStats(userID)),
   };
 };
 
 function ActionsContainer(props) {
   const actions = ['Practice', 'Live', 'Tsunagari', 'Tweet'];
+  const { actionResults, userID, getPlayerStats } = props;
+  useEffect(() => {
+    if (actionResults.length !== 0) {
+      getPlayerStats(userID)
+    }
+  }, [actionResults, userID, getPlayerStats])
   return <Actions {...props} actions={actions} />;
 }
 
