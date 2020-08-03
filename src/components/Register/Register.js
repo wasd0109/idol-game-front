@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 import { register } from '../../actions';
 import ErrorBar from '../ErrorBar/index';
+
 
 const mapStateToProps = (state) => {
   return {
@@ -86,12 +88,7 @@ function Register(props) {
             >
               Register
             </button>
-            <a
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="/"
-            >
-              Sign In
-            </a>
+            <Link to="/" className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"><p>Login</p></Link>
           </div>
         </form>
         <div className="text-center">

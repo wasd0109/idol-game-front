@@ -1,27 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './Actions.css';
-import { connect } from 'react-redux';
 import AlertBar from '../AlertBar';
-import { performAction } from '../../actions';
 
-const mapStateToProps = (state) => {
-  return {
-    actionResults: state.receiveActionResults.actionResults,
-    userID: state.logUserIn.userID,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    performAction: (event) => {
-      dispatch(performAction(event));
-    },
-  };
-};
-
-function Actions(props) {
-  const { actionResults, performAction, userID } = props;
-  const coolDownTime = process.env.NODE_ENV === 'development' ? 2000 : 60000;
+function Actions({ actionResults, performAction, userID, actions }) {
+  const coolDownTime =
+    process.env.NODE_ENV === 'development' ||
+      process.env.JEST_WORKER_ID !== undefined
+      ? 2000
+      : 60000;
   const [timer, setTimer] = useState(
     Number(localStorage.getItem('timer')) || 0
   );
@@ -46,14 +32,13 @@ function Actions(props) {
     setTimer(coolDownTime);
   };
 
-  const actions = ['Practice', 'Live', 'Tsunagari', 'Tweet'];
   const actionBar = actions.map((action) => (
     <button
       key={action}
       className="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
       id={action}
       onClick={(event) => {
-        performAction(event);
+        performAction(event.currentTarget.value, event.currentTarget.id);
         startCoolDown();
       }}
       value={userID}
@@ -80,10 +65,10 @@ function Actions(props) {
       {timer ? (
         <AlertBar msg={`Cooling down, please wait ${timer / 1000} seconds`} />
       ) : (
-        <AlertBar msg={'Press button to perform action'} />
-      )}
+          <AlertBar msg={'Press button to perform action'} />
+        )}
     </React.Fragment>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Actions);
+export default Actions;

@@ -35,6 +35,9 @@ function App(props) {
       localStorage.setItem('userID', userID);
       localStorage.setItem('loggedIn', loggedIn);
     }
+    if (!loggedIn) {
+      localStorage.clear();
+    }
   }, [userID, loggedIn, username, getPlayerStats]);
 
   return loggedIn ? (
@@ -49,25 +52,25 @@ function App(props) {
       </div>
     </Router>
   ) : (
-    <Suspense
-      fallback={
-        <div className="flex justify-center mt-24">
-          <Loader type="TailSpin" color="#00BFFF" height={200} width={200} />
-        </div>
-      }
-    >
-      <Router>
-        <Switch>
-          <Route path="/register">
-            <LazyRegister />
-          </Route>
-          <Route path="/">
-            <Login />
-          </Route>
-        </Switch>
-      </Router>
-    </Suspense>
-  );
+      <Suspense
+        fallback={
+          <div className="flex justify-center mt-24">
+            <Loader type="TailSpin" color="#00BFFF" height={200} width={200} />
+          </div>
+        }
+      >
+        <Router>
+          <Switch>
+            <Route path="/register">
+              <LazyRegister />
+            </Route>
+            <Route path="/">
+              <Login />
+            </Route>
+          </Switch>
+        </Router>
+      </Suspense>
+    );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
