@@ -26,25 +26,25 @@ export const getPlayerStats = (userID) => (dispatch) => {
     .catch(() => dispatch({ type: GET_PLAYER_STATS_FAILED }));
 };
 
-export const performAction = (userID, action) => (dispatch) => {
-  dispatch({ type: ACTION_PENDING });
-  const data = {
-    action: action,
-    userID: userID,
-  };
-  return fetch(`${backendURL}/action`, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({ type: ACTION_SUCCESS, payload: data });
-    })
-    .catch(() => dispatch({ type: ACTION_FAILED }));
-};
+// export const performAction = (userID, action) => (dispatch) => {
+//   dispatch({ type: ACTION_PENDING });
+//   const data = {
+//     action: action,
+//     userID: userID,
+//   };
+//   return fetch(`${backendURL}/action`, {
+//     method: 'post',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(data),
+//   })
+//     .then((res) => res.json())
+//     .then((data) => {
+//       dispatch({ type: ACTION_SUCCESS, payload: data });
+//     })
+//     .catch(() => dispatch({ type: ACTION_FAILED }));
+// };
 
 export const login = (username, password) => (dispatch) => {
   if (!username || !password)

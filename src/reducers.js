@@ -42,29 +42,29 @@ export const setPlayerStats = (state = initialPlayerStats, action = {}) => {
   }
 };
 
-const initialActionResults = {
-  actionResults: localStorage.getItem('actionList')
-    ? localStorage.getItem('actionList').split(',')
-    : [],
-};
+// const initialActionResults = {
+//   actionResults: localStorage.getItem('actionList')
+//     ? localStorage.getItem('actionList').split(',')
+//     : [],
+// };
 
-export const receiveActionResults = (
-  state = initialActionResults,
-  action = {}
-) => {
-  switch (action.type) {
-    case ACTION_SUCCESS:
-      const prevResults = [...state.actionResults];
-      if (state.actionResults.length > 15) {
-        state.actionResults.shift();
-      }
-      return Object.assign({}, state, {
-        actionResults: [...prevResults, action.payload],
-      });
-    default:
-      return state;
-  }
-};
+// export const receiveActionResults = (
+//   state = initialActionResults,
+//   action = {}
+// ) => {
+//   switch (action.type) {
+//     case ACTION_SUCCESS:
+//       const prevResults = [...state.actionResults];
+//       if (state.actionResults.length > 15) {
+//         state.actionResults.shift();
+//       }
+//       return Object.assign({}, state, {
+//         actionResults: [...prevResults, action.payload],
+//       });
+//     default:
+//       return state;
+//   }
+// };
 
 const initialUser = {
   username: localStorage.getItem('username')

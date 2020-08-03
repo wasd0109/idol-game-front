@@ -9,7 +9,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {
   setPlayerStats,
-  receiveActionResults,
   logUserIn,
   triggerError,
 } from './reducers';
@@ -19,7 +18,6 @@ import { LOGOUT } from './constants';
 const logger = createLogger();
 const appReducer = combineReducers({
   setPlayerStats,
-  receiveActionResults,
   logUserIn,
   triggerError,
 });

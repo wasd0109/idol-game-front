@@ -45,7 +45,6 @@ describe('Action component function as expected', () => {
     fireEvent.click(actionBtn);
     expect(initialProps.performAction).toBeCalledWith(
       initialProps.userID,
-      action
     );
   });
   test('Triggering action results in cool down', () => {
