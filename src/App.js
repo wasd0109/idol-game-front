@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { getPlayerStats, logout } from './actions';
@@ -12,37 +12,81 @@ const LazyRegister = React.lazy(() => import('./components/Register'));
 
 const mapStateToProps = (state) => {
   return {
-    player: state.setPlayerStats.player,
-    username: state.logUserIn.username,
-    userID: state.logUserIn.userID,
-    loggedIn: state.logUserIn.loggedIn,
+    // player: state.setPlayerStats.player,
+    // username: state.logUserIn.username,
+    // userID: state.logUserIn.userID,
+    // loggedIn: state.logUserIn.loggedIn,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getPlayerStats: (userID) => dispatch(getPlayerStats(userID)),
-    logout: () => dispatch(logout()),
+    // logout: () => dispatch(logout()),
   };
 };
 
 function App(props) {
-  const { getPlayerStats, player, username, userID, loggedIn, logout } = props;
+  const initialUser = {
+    username: localStorage.getItem('username')
+      ? localStorage.getItem('username')
+      : '',
+    userID: localStorage.getItem('userID') ? localStorage.getItem('userID') : "0",
+  }
+  const { logout } = props;
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn')
+    ? localStorage.getItem('loggedIn')
+    : false);
+  const [user, setUser] = useState(initialUser);
+
+  const { username, userID } = user;
+
   useEffect(() => {
     if (loggedIn) {
-      getPlayerStats(userID);
       localStorage.setItem('username', username);
       localStorage.setItem('userID', userID);
-      localStorage.setItem('loggedIn', loggedIn);
+      localStorage.setItem('loggedIn', String(loggedIn));
     }
     if (!loggedIn) {
       localStorage.clear();
     }
-  }, [userID, loggedIn, username, getPlayerStats]);
+  }, [userID, loggedIn, username]);
+
+  const handleLogin = (username, id) => {
+    if (username || id) {
+      setUser({ username: username, userID: id });
+      setLoggedIn(true);
+    }
+  }
+
+  const [error, setError] = useState(undefined);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  const onSubmit = (username, password,playerName=undefined) => {
+    setIsLoggingIn(!isLoggingIn);
+    const data =playerName?{username,password,playerName}: { username, password };
+    const url = playerName?'https://idol-game.herokuapp.com/register':'https://idol-game.herokuapp.com/login';
+    fetch(url, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then((res) => res.json()).then(data => {
+      const { username, id } = data;
+      if (username && id) handleLogin(username, id)
+      else setError(data)
+    }).catch((error) => setError(error))
+    setIsLoggingIn(!isLoggingIn);
+  }
+
+  const onLogout=()=>{
+    setLoggedIn(!loggedIn);
+  }
 
   return loggedIn ? (
     <Router>
-      <Navbar logout={logout} />
+      <Navbar onLogout={onLogout} />
       <div>
         <Switch>
           <Route path="/">
@@ -62,10 +106,10 @@ function App(props) {
         <Router>
           <Switch>
             <Route path="/register">
-              <LazyRegister />
+              <LazyRegister onSubmit={onSubmit} isLoggingIn={isLoggingIn} error={error} />
             </Route>
             <Route path="/">
-              <Login />
+              <Login onSubmit={onSubmit} isLoggingIn={isLoggingIn} error={error} />
             </Route>
           </Switch>
         </Router>

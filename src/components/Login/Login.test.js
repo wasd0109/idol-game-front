@@ -1,30 +1,23 @@
 import React from 'react';
-import { render, waitFor, screen } from '@testing-library/react';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
+import { render, waitFor, waitForElementToBeRemoved, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import fetchMock from 'jest-fetch-mock';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Login from './Login';
 
-const mockStore = configureStore([thunk]);
+
 
 let component;
-let store;
 
 const initialProps = {
-  triggerError: {
-    isError: false,
-    errorMessage: '',
-  },
   onSubmit: jest.fn(),
+  error: "",
+  isLoggingIn: false
 };
 
 beforeEach(() => {
-  store = mockStore(initialProps);
   component = render(
-    <Router><Provider store={store}><Login /> </Provider></Router>
+    <Router><Login {...initialProps} /></Router>
   );
 });
 
@@ -33,20 +26,28 @@ describe('Login component render correctly', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('Login render error correctly', () => {
+  test('Login render logging in message correctly', async () => {
     const props = {
-      triggerError: {
-        isError: true,
-        errorMessage: 'Test message',
-      },
+      onSubmit: jest.fn(),
+      error: "",
+      isLoggingIn: true
     };
-    const store = mockStore(props);
-    const { getByText } = render(
-
-      <Router><Provider store={store}><Login /> </Provider></Router>
-
+    component = render(
+      <Router><Login {...props} /></Router>
     );
-    expect(getByText(props.triggerError.errorMessage)).toBeInTheDocument();
+    expect(screen.getByText("Logging in")).toBeInTheDocument();
+  });
+
+  test('Login render error correctly', async () => {
+    const props = {
+      onSubmit: jest.fn(),
+      error: "Error",
+      isLoggingIn: false
+    };
+    component = render(
+      <Router><Login {...props} /></Router>
+    );
+    expect(screen.getByText(props.error)).toBeInTheDocument();
   });
 });
 
@@ -65,32 +66,13 @@ describe('Login component function correctly', () => {
     expect(screen.getByLabelText('Password').value).toEqual(password);
   });
 
-
-
   test('Login form submit with correct information', async () => {
-    expect.assertions(2);
+    expect.assertions(1);
     const username = 'Testuser123';
     const password = 'testuser123';
-    // Extremely indirect method
-    fetchMock.mockResponse(async (req) => {
-      const data = await req.json();
-      if (data.username === username && data.password === password) {
-        store.dispatch({
-          type: 'LOGIN_SUCCESS',
-        });
-        return Promise.resolve('Success');
-      }
-      return Promise.reject('Error');
-    });
     await userEvent.type(screen.getByLabelText('Username'), username);
     await userEvent.type(screen.getByLabelText('Password'), password);
     userEvent.click(screen.getByText('Login'));
-    expect(screen.getByText('Logging in')).toBeInTheDocument();
-    waitFor(() => {
-      const actions = store.getActions();
-      if (actions.length > 1) {
-        expect(actions[1].type).toEqual('LOGIN_SUCCESS');
-      }
-    });
+    expect(initialProps.onSubmit).toBeCalledWith(username, password)
   });
 });

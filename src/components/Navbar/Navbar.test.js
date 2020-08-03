@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import Navbar from './Navbar';
 
 const initialProps = {
-    logout: jest.fn(),
+    onLogout: jest.fn(),
 };
 
 const navBarContent = [
@@ -43,6 +43,6 @@ describe("Navbar component function correctly", () => {
     })
     test("Clicking logout button trigger logout", () => {
         userEvent.click(screen.getByText("Logout"));
-        expect(initialProps.logout).toBeCalled();
+        expect(initialProps.onLogout).toBeCalled();
     })
 })

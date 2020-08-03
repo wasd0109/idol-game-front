@@ -11,7 +11,7 @@ const generateNavBarButton = (name, link) => (
   </Link>
 );
 
-function Navbar({ logout }) {
+function Navbar({ onLogout }) {
   const navBarContent = [
     ['Home', '/'],
     ['Player List', '/players'],
@@ -28,7 +28,7 @@ function Navbar({ logout }) {
       <Link
         to="/"
         className="transition duration-500 hover:bg-white h-full pt-4 px-2 mr-1 ml-auto"
-        onClick={logout}
+        onClick={onLogout}
       >
         <p className="text-lg font-medium">Logout</p>
       </Link>

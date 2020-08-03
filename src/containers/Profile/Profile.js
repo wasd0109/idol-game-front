@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Stats from '../../components/Stats';
 import Actions from '../../components/Actions';
 import Loader from 'react-loader-spinner';
+// import useFetch from "../../api"
 
 
 function Profile({ userID }) {
@@ -31,6 +32,14 @@ function Profile({ userID }) {
       .catch((error) => setActionError(error));
   };
 
+  const actionsProps = {
+    actionResults,
+    actionError,
+    actions,
+    performAction,
+    userID
+  }
+
   const [player, setPlayer] = useState({
     name: '',
     title: '',
@@ -47,6 +56,8 @@ function Profile({ userID }) {
   });
 
   const [playerError, setPlayerError] = useState(null);
+  const stats = [];
+  const hiddenInfo = ['id', 'userid', 'message'];
 
   useEffect(() => {
     fetch(`https://idol-game.herokuapp.com/profile/${userID}`)
@@ -55,8 +66,12 @@ function Profile({ userID }) {
         setPlayer(data[0]))
 
       .catch((error) => setPlayerError(error));
-  }, [actionResults])
+  }, [actionResults, userID])
 
+  const statsProps = {
+    stats,
+    playerError
+  }
 
   if (!player) {
     return (
@@ -73,8 +88,6 @@ function Profile({ userID }) {
       </div>
     );
   }
-  const stats = [];
-  const hiddenInfo = ['id', 'userid', 'message'];
 
 
   for (const [key, value] of Object.entries(player)) {
@@ -83,10 +96,10 @@ function Profile({ userID }) {
   return (
     <div className="flex mx-4 my-2 flex-wrap">
       <div className="md:w-4/12 xl:w-3/12 h-auto" id="stats">
-        <Stats stats={stats} />
+        <Stats {...statsProps} />
       </div>
       <div className="w-full my-2 md:my-0 md:w-7/12 m-auto">
-        <Actions performAction={performAction} actionResults={actionResults} userID={player.userid} actions={actions} />
+        <Actions {...actionsProps} />
       </div>
     </div>
   );

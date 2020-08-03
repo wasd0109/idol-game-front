@@ -1,29 +1,14 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { login } from '../../actions';
 import ErrorBar from '../ErrorBar';
 import AlertBar from '../AlertBar';
-import useFetch from "../../api";
 
 
-const mapStateToProps = (state) => {
-  return {
-    isError: state.triggerError.isError,
-    errorMessage: state.triggerError.errorMessage,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onSubmit: (username, password) => dispatch(login(username, password)),
-  };
-};
-
-function Login({ onSubmit, isError, errorMessage }) {
+function Login({ onSubmit, isLoggingIn, error }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loggingIn, setLoggingIn] = useState(false);
+
   return (
     <div className="flex justify-center mt-4 md:mt-16">
       <div className="w-full max-w-xs">
@@ -60,8 +45,8 @@ function Login({ onSubmit, isError, errorMessage }) {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
-          {isError ? <ErrorBar msg={errorMessage} /> : null}
-          {loggingIn && !isError ? <AlertBar msg="Logging in" /> : null}
+          {error ? <ErrorBar msg={error} /> : null}
+          {isLoggingIn && !error ? <AlertBar msg="Logging in" /> : null}
           <div className="flex items-center justify-between mt-4">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -69,7 +54,6 @@ function Login({ onSubmit, isError, errorMessage }) {
               onClick={(event) => {
                 event.preventDefault();
                 onSubmit(username, password);
-                setLoggingIn(true);
               }}
             >
               Login
@@ -82,4 +66,4 @@ function Login({ onSubmit, isError, errorMessage }) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
