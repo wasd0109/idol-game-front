@@ -1,30 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Stats from '../../components/Stats';
 import Actions from '../../components/Actions';
 import Loader from 'react-loader-spinner';
 
 
-// export const receiveActionResults = (
-//   state = initialActionResults,
-//   action = {}
-// ) => {
-//   switch (action.type) {
-//     case "ACTION_SUCCESS":
-//       const prevResults = [...state.actionResults];
-//       if (state.actionResults.length > 15) {
-//         state.actionResults.shift();
-//       }
-//       return Object.assign({}, state, {
-//         actionResults: [...prevResults, action.payload],
-//       });
-//     default:
-//       return state;
-//   }
-// };
-
-
-
-function Profile({ player }) {
+function Profile({ userID }) {
   const [actionResults, setActionResults] = useState(localStorage.getItem('actionList')
     ? localStorage.getItem('actionList').split(',')
     : []);
@@ -50,6 +30,33 @@ function Profile({ player }) {
       })
       .catch((error) => setActionError(error));
   };
+
+  const [player, setPlayer] = useState({
+    name: '',
+    title: '',
+    HP: 0,
+    level: 0,
+    element: '',
+    exp: 0,
+    attack: 0,
+    defense: 0,
+    magic_attack: 0,
+    magic_defense: 0,
+    agility: 0,
+    luck: 0,
+  });
+
+  const [playerError, setPlayerError] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://idol-game.herokuapp.com/profile/${userID}`)
+      .then((res) => res.json())
+      .then((data) =>
+        setPlayer(data[0]))
+
+      .catch((error) => setPlayerError(error));
+  }, [actionResults])
+
 
   if (!player) {
     return (

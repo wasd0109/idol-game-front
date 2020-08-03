@@ -46,7 +46,7 @@ function App(props) {
       <div>
         <Switch>
           <Route path="/">
-            <Profile player={player} />
+            <Profile userID={userID} />
           </Route>
         </Switch>
       </div>
