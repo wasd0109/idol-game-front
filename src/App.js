@@ -38,7 +38,7 @@ function App() {
   const [error, setError] = useState(undefined);
 
   const onSubmit = (username, password, playerName = undefined) => {
-    const data = playerName ? { username, password, playerName } : { username, password };
+    const data = playerName ? { username, password, name: playerName } : { username, password };
     const url = playerName ? 'https://idol-game.herokuapp.com/register' : 'https://idol-game.herokuapp.com/login';
     fetch(url, {
       method: 'post',
