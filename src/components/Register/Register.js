@@ -64,6 +64,7 @@ function Register({ onSubmit, error, resetError }) {
               type="submit"
               onClick={(event) => {
                 event.preventDefault();
+                resetError();
                 onSubmit(username, password, playerName,);
               }}
             >

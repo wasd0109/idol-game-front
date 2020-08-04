@@ -11,6 +11,7 @@ function Actions({ actionResults, performAction, userID, actions }) {
   const [timer, setTimer] = useState(
     Number(localStorage.getItem('timer')) || 0
   );
+
   useEffect(() => {
     const btnList = document.querySelectorAll('.action-button');
     if (timer) {

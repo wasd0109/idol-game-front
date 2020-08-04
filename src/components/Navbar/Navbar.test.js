@@ -16,8 +16,6 @@ const initialProps = {
     navBarContent,
 };
 
-
-
 let component;
 
 beforeEach(() => {

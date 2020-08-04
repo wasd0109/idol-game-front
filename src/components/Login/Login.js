@@ -53,7 +53,8 @@ function Login({ onSubmit, error, resetError }) {
                 if (username && password) {
                   setIsLoggingIn(true);
                 }
-                await onSubmit(username, password);
+                resetError();
+                await onSubmit(username, password)
               }}
             >
               Login
