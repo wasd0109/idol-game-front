@@ -1,0 +1,680 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile container render correctly Profile container render 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="flex mx-4 my-2 flex-wrap"
+      >
+        <div
+          class="md:w-4/12 xl:w-3/12 h-auto"
+          id="stats"
+        >
+          <ul
+            class="flex flex-wrap border-l-2 border-t-2"
+          >
+            <div
+              class="w-12/12 h-auto border-l-0 border-r-2 border-b-2 m-auto"
+            >
+              <img
+                alt="Profile"
+                src="profile_image.jpg"
+              />
+            </div>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              name
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              title
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              HP
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              level
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              element
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              exp
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              attack
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              defense
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              magic attack
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              magic defense
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              agility
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+            <li
+              class="w-6/12 capitalize border-r-2 border-b-2"
+            >
+              luck
+               
+              <span
+                class="text-lg font-bold"
+                id="skeleton"
+              >
+                <span>
+                  <span
+                    class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                    style="width: 40px;"
+                  >
+                    ‌
+                  </span>
+                </span>
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="w-full my-2 md:my-0 md:w-7/12 m-auto"
+        >
+          <div
+            class="border-2 p-2 overflow-y-scroll capitalize"
+            id="performed"
+          />
+          <div
+            class="flex justify-evenly my-2 flex-wrap md:no-wrap"
+            id="actions"
+          >
+            <button
+              class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
+              id="Practice"
+            >
+              <p
+                class="text-white font-bold"
+              >
+                Practice
+              </p>
+            </button>
+            <button
+              class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
+              id="Live"
+            >
+              <p
+                class="text-white font-bold"
+              >
+                Live
+              </p>
+            </button>
+            <button
+              class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
+              id="Tsunagari"
+            >
+              <p
+                class="text-white font-bold"
+              >
+                Tsunagari
+              </p>
+            </button>
+            <button
+              class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
+              id="Tweet"
+            >
+              <p
+                class="text-white font-bold"
+              >
+                Tweet
+              </p>
+            </button>
+          </div>
+          <div
+            class="items-center bg-blue-500 text-white font-semibold px-4 py-3 rounded"
+            role="alert"
+          >
+            Press button to perform action
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="flex mx-4 my-2 flex-wrap"
+    >
+      <div
+        class="md:w-4/12 xl:w-3/12 h-auto"
+        id="stats"
+      >
+        <ul
+          class="flex flex-wrap border-l-2 border-t-2"
+        >
+          <div
+            class="w-12/12 h-auto border-l-0 border-r-2 border-b-2 m-auto"
+          >
+            <img
+              alt="Profile"
+              src="profile_image.jpg"
+            />
+          </div>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            name
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            title
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            HP
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            level
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            element
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            exp
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            attack
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            defense
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            magic attack
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            magic defense
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            agility
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+          <li
+            class="w-6/12 capitalize border-r-2 border-b-2"
+          >
+            luck
+             
+            <span
+              class="text-lg font-bold"
+              id="skeleton"
+            >
+              <span>
+                <span
+                  class="react-loading-skeleton css-1vmnjpn-skeletonStyles-Skeleton"
+                  style="width: 40px;"
+                >
+                  ‌
+                </span>
+              </span>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="w-full my-2 md:my-0 md:w-7/12 m-auto"
+      >
+        <div
+          class="border-2 p-2 overflow-y-scroll capitalize"
+          id="performed"
+        />
+        <div
+          class="flex justify-evenly my-2 flex-wrap md:no-wrap"
+          id="actions"
+        >
+          <button
+            class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
+            id="Practice"
+          >
+            <p
+              class="text-white font-bold"
+            >
+              Practice
+            </p>
+          </button>
+          <button
+            class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
+            id="Live"
+          >
+            <p
+              class="text-white font-bold"
+            >
+              Live
+            </p>
+          </button>
+          <button
+            class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
+            id="Tsunagari"
+          >
+            <p
+              class="text-white font-bold"
+            >
+              Tsunagari
+            </p>
+          </button>
+          <button
+            class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
+            id="Tweet"
+          >
+            <p
+              class="text-white font-bold"
+            >
+              Tweet
+            </p>
+          </button>
+        </div>
+        <div
+          class="items-center bg-blue-500 text-white font-semibold px-4 py-3 rounded"
+          role="alert"
+        >
+          Press button to perform action
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
