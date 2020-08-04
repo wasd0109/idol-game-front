@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Profile from '../../containers/Profile';
+import PlayersList from "../../components/PlayersList"
 
 function MainPage({ setLoggedIn, userID }) {
     const onLogout = () => {
@@ -25,6 +26,9 @@ function MainPage({ setLoggedIn, userID }) {
             <Navbar {...navBarProps} />
             <div>
                 <Switch>
+                    <Route path="/players">
+                        <PlayersList />
+                    </Route>
                     <Route path="/">
                         <Profile userID={userID} />
                     </Route>
