@@ -47,8 +47,7 @@ function Profile({ userID }) {
   useEffect(() => {
     fetch(`https://idol-game.herokuapp.com/profile/${userID}`)
       .then((res) => res.json())
-      .then((data) =>
-        setPlayer(data[0]))
+      .then((data) => { setPlayer(data[0]) })
       .catch((error) => setPlayerError(error));
   }, [actionResults, userID])
 
@@ -70,7 +69,6 @@ function Profile({ userID }) {
     performAction,
     userID
   }
-
   return (
     <div className="flex mx-4 my-2 flex-wrap">
       <div className="md:w-4/12 xl:w-3/12 h-auto" id="stats">
