@@ -9,7 +9,8 @@ const player = {
 const players = [];
 
 for (let i = 0; i < 30; i++) {
-  players.push({ ...player, id: String(i) });
+  console.log(i);
+  players.push({ ...player, id: String(i), name: `Ken${i}` });
 }
 
 export default players;

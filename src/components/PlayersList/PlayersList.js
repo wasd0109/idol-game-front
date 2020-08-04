@@ -10,25 +10,34 @@ function PlayersList() {
   let pages = [];
   for (let i = 1; i <= numberOfPages; i++) {
     pages.push(
-      <p
-        className="text-xl text-bold cursor-pointer"
+      <span
+        className="text-xl text-bold cursor-pointer mx-1"
         onClick={() => setCurrentPage(i)}
+        key={i}
       >
         {i}
-      </p>
+      </span>
     );
   }
+  console.log(currentPage);
   return (
     <div>
       <div className="w-8/12 m-auto flex">
         <h1 className="text-2xl text-bold">Players List</h1>
-        <div className="flex mt-auto ml-auto gap-2">{pages}</div>
+        <div className="flex mt-auto ml-auto">
+          <span>Page: {pages}</span>
+        </div>
       </div>
-      {players.map((player, i) =>
-        i < currentPage * itemPerPage ? (
-          <PlayerCard key={player.id} player={player} />
-        ) : null
-      )}
+      {players.map((player, i) => {
+        if (
+          i > (currentPage - 1) * itemPerPage &&
+          i < currentPage * itemPerPage
+        ) {
+          console.log((currentPage - 1) * itemPerPage);
+          return <PlayerCard key={player.id} player={player} />;
+        }
+        return null;
+      })}
     </div>
   );
 }
