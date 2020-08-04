@@ -15,6 +15,7 @@ function App() {
       : '',
     userID: localStorage.getItem('userID') ? localStorage.getItem('userID') : "0",
   }
+
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn')
     ? localStorage.getItem('loggedIn')
     : false);
@@ -37,7 +38,6 @@ function App() {
   const [error, setError] = useState(undefined);
 
   const onSubmit = (username, password, playerName = undefined) => {
-    setError(null);
     const data = playerName ? { username, password, playerName } : { username, password };
     const url = playerName ? 'https://idol-game.herokuapp.com/register' : 'https://idol-game.herokuapp.com/login';
     fetch(url, {
@@ -59,7 +59,6 @@ function App() {
   const resetError = () => {
     setError(null);
   }
-
 
   return loggedIn ? (
     <MainPage userID={userID} setLoggedIn={setLoggedIn} />
