@@ -1,30 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PlayerCard from '../PlayerCard';
-import players from './data';
+import useFetch from '../../api';
+// import players from './data';
 
 function PlayersList() {
-  const itemPerPage = 10;
-  const totalItem = players.length;
-  const numberOfPages = totalItem / itemPerPage;
+  const [itemPerPage, setItemPerPage] = useState(10);
+  const [players, error, isLoading] = useFetch(
+    'https://idol-game.herokuapp.com/players'
+  );
   const [currentPage, setCurrentPage] = useState(1);
-  let pages = [];
-  for (let i = 1; i <= numberOfPages; i++) {
-    pages.push(
-      <span
-        className="text-xl text-bold cursor-pointer mx-1"
-        onClick={() => setCurrentPage(i)}
-        key={i}
-      >
-        {i}
-      </span>
-    );
+  const [pageState, setPageState] = useState({
+    pageUpper: players ? Math.round(players.length / itemPerPage) : 1,
+    pageLower: 1,
+  });
+
+  const numberOfPages = players ? Math.round(players.length / itemPerPage) : 1;
+
+  let pagesBtn = [];
+
+  useEffect(() => {
+    if (numberOfPages > 5 && currentPage > 3) {
+      setPageState({
+        pageUpper: currentPage + 2,
+        pageLower: currentPage - 2,
+      });
+    }
+  }, [currentPage, numberOfPages]);
+
+  if (isLoading) return null;
+
+  for (let i = pageState.pageLower; i <= numberOfPages; i++) {
+    if (i <= pageState.pageUpper)
+      pagesBtn.push(
+        <span
+          className={`text-xl text-bold mx-1 ${
+            i === currentPage ? 'text-gray-600' : 'cursor-pointer'
+          }`}
+          onClick={() => setCurrentPage(i)}
+          key={i}
+          id={String(i)}
+        >
+          {i}
+        </span>
+      );
   }
   return (
     <div>
       <div className="w-8/12 m-auto flex">
         <h1 className="text-2xl text-bold">Players List</h1>
         <div className="flex mt-auto ml-auto">
-          <span>Page: {pages}</span>
+          <span className="ml-auto">Page: {pagesBtn}</span>
         </div>
       </div>
       {players.map((player, i) => {

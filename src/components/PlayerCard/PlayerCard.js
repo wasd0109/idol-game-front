@@ -1,5 +1,4 @@
 import React from 'react';
-
 import profileImage from '../../assets/profile_image.jpg';
 
 function PlayerCard({ player }) {
