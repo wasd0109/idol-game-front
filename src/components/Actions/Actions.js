@@ -3,11 +3,13 @@ import './Actions.css';
 import AlertBar from '../AlertBar';
 
 function Actions({ actionResults, performAction, userID, actions }) {
+
   const coolDownTime =
-    process.env.NODE_ENV === 'development' ||
-      process.env.JEST_WORKER_ID !== undefined
+    (process.env.NODE_ENV === 'development' ||
+      process.env.JEST_WORKER_ID !== undefined)
       ? 2000
       : 60000;
+
   const [timer, setTimer] = useState(
     Number(localStorage.getItem('timer')) || 0
   );
@@ -16,18 +18,18 @@ function Actions({ actionResults, performAction, userID, actions }) {
 
   useEffect(() => {
     const btnList = document.querySelectorAll('.action-button');
-    if (isCoolDown) {
-      btnList.forEach((btn) => btn.setAttribute('disabled', ''));
-    } else {
+    isCoolDown ?
+      btnList.forEach((btn) => btn.setAttribute('disabled', '')) :
       btnList.forEach((btn) => btn.removeAttribute('disabled'));
-    }
   }, [isCoolDown]);
 
   useEffect(() => {
-    timer > 0 ? setTimeout(() => setTimer(timer - 1000), 1000) : setIsCoolDown(false);
+    timer > 0 ?
+      setTimeout(() => setTimer(timer - 1000), 1000) :
+      setIsCoolDown(false);
     localStorage.removeItem('timer');
     localStorage.setItem('timer', String(timer));
-  }, [timer, coolDownTime])
+  }, [timer])
 
   useEffect(() => {
     const performed = document.querySelector('#performed');
@@ -57,11 +59,10 @@ function Actions({ actionResults, performAction, userID, actions }) {
             key={action}
             className="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
             id={action}
-            onClick={(event) => {
-              performAction(event.currentTarget.value);
-              startCoolDown()
+            onClick={() => {
+              performAction(userID);
+              startCoolDown();
             }}
-            value={userID}
           >
             <p className="text-white font-bold">{action}</p>
           </button>

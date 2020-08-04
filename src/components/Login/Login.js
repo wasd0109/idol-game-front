@@ -7,7 +7,7 @@ function Login({ onSubmit, error, resetError }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  if (error && isLoggingIn) setIsLoggingIn(false)
+  if (error && isLoggingIn) setIsLoggingIn(false);
   return (
     <div className="flex justify-center mt-4 md:mt-16">
       <div className="w-full max-w-xs">
@@ -48,13 +48,12 @@ function Login({ onSubmit, error, resetError }) {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
-              onClick={async (event) => {
+              onClick={(event) => {
                 event.preventDefault();
-                if (username && password) {
+                if (username && password)
                   setIsLoggingIn(true);
-                }
                 resetError();
-                await onSubmit(username, password)
+                onSubmit(username, password)
               }}
             >
               Login
@@ -62,7 +61,7 @@ function Login({ onSubmit, error, resetError }) {
             <Link to="/register" className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" onClick={resetError}><p>Register</p></Link>
           </div>
           <div className="mt-4 mb-2">{error ? <ErrorBar msg={error} /> : null}
-            {isLoggingIn && !error ? <AlertBar msg="Logging in" /> : null}</div>
+            {isLoggingIn ? <AlertBar msg="Logging in" /> : null}</div>
         </form>
       </div>
     </div>

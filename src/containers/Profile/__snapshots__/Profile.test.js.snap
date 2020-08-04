@@ -267,7 +267,6 @@ Object {
             <button
               class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
               id="Practice"
-              value="0"
             >
               <p
                 class="text-white font-bold"
@@ -278,7 +277,6 @@ Object {
             <button
               class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
               id="Live"
-              value="0"
             >
               <p
                 class="text-white font-bold"
@@ -289,7 +287,6 @@ Object {
             <button
               class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
               id="Tsunagari"
-              value="0"
             >
               <p
                 class="text-white font-bold"
@@ -300,7 +297,6 @@ Object {
             <button
               class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
               id="Tweet"
-              value="0"
             >
               <p
                 class="text-white font-bold"
@@ -582,7 +578,6 @@ Object {
           <button
             class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
             id="Practice"
-            value="0"
           >
             <p
               class="text-white font-bold"
@@ -593,7 +588,6 @@ Object {
           <button
             class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
             id="Live"
-            value="0"
           >
             <p
               class="text-white font-bold"
@@ -604,7 +598,6 @@ Object {
           <button
             class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
             id="Tsunagari"
-            value="0"
           >
             <p
               class="text-white font-bold"
@@ -615,7 +608,6 @@ Object {
           <button
             class="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
             id="Tweet"
-            value="0"
           >
             <p
               class="text-white font-bold"
