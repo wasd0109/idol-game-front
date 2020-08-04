@@ -12,17 +12,22 @@ function Actions({ actionResults, performAction, userID, actions }) {
     Number(localStorage.getItem('timer')) || 0
   );
 
+  const [isCoolDown, setIsCoolDown] = useState(false);
+
   useEffect(() => {
     const btnList = document.querySelectorAll('.action-button');
-    if (timer) {
-      timer > 0 && setTimeout(() => setTimer(timer - 1000), 1000);
+    if (isCoolDown) {
       btnList.forEach((btn) => btn.setAttribute('disabled', ''));
     } else {
       btnList.forEach((btn) => btn.removeAttribute('disabled'));
     }
+  }, [isCoolDown]);
+
+  useEffect(() => {
+    timer > 0 ? setTimeout(() => setTimer(timer - 1000), 1000) : setIsCoolDown(false);
     localStorage.removeItem('timer');
     localStorage.setItem('timer', String(timer));
-  }, [timer, coolDownTime]);
+  }, [timer, coolDownTime])
 
   useEffect(() => {
     const performed = document.querySelector('#performed');
@@ -31,23 +36,8 @@ function Actions({ actionResults, performAction, userID, actions }) {
 
   const startCoolDown = () => {
     setTimer(coolDownTime);
-  };
-
-  const actionBar = actions.map((action) => (
-
-    <button
-      key={action}
-      className="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
-      id={action}
-      onClick={(event) => {
-        performAction(event.currentTarget.value);
-        startCoolDown();
-      }}
-      value={userID}
-    >
-      <p className="text-white font-bold">{action}</p>
-    </button>
-  ));
+    setIsCoolDown(true);
+  }
 
   return (
     <React.Fragment>
@@ -62,13 +52,22 @@ function Actions({ actionResults, performAction, userID, actions }) {
         id="actions"
         className="flex justify-evenly my-2 flex-wrap md:no-wrap"
       >
-        {actionBar}
+        {actions.map((action) => (
+          <button
+            key={action}
+            className="action-button bg-blue-500 my-2 md:m-0 hover:bg-blue-400 p-2 rounded w-5/12 md:w-2/12"
+            id={action}
+            onClick={(event) => {
+              performAction(event.currentTarget.value);
+              startCoolDown()
+            }}
+            value={userID}
+          >
+            <p className="text-white font-bold">{action}</p>
+          </button>
+        ))}
       </div>
-      {timer ? (
-        <AlertBar msg={`Cooling down, please wait ${timer / 1000} seconds`} />
-      ) : (
-          <AlertBar msg={'Press button to perform action'} />
-        )}
+      <AlertBar msg={timer ? `Cooling down, please wait for ${timer / 1000} seconds` : 'Press button to perform action'} />
     </React.Fragment>
   );
 }
