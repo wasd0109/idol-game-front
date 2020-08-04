@@ -19,7 +19,6 @@ function PlayersList() {
       </span>
     );
   }
-  console.log(currentPage);
   return (
     <div>
       <div className="w-8/12 m-auto flex">
@@ -33,7 +32,6 @@ function PlayersList() {
           i > (currentPage - 1) * itemPerPage &&
           i < currentPage * itemPerPage
         ) {
-          console.log((currentPage - 1) * itemPerPage);
           return <PlayerCard key={player.id} player={player} />;
         }
         return null;

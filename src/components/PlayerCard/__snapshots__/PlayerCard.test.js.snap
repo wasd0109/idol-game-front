@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerCard component render correctly PlayerCard component render 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="my-2 w-8/12 h-auto border-l-2 border-t-2 m-auto flex"
+      >
+        <div
+          class="justify-start w-2/12 h-auto border-r-2 border-b-2"
+        >
+          <img
+            alt="Profile"
+            src="profile_image.jpg"
+          />
+        </div>
+        <div
+          class="grid w-10/12 grid-rows-3  grid-cols-2"
+        >
+          <p
+            class="row-span-1 col-span-1  capitalize border-r-2 border-b-2"
+          >
+            name
+            : 
+            <span
+              class="text-lg font-bold"
+            >
+              Ken
+            </span>
+          </p>
+          <p
+            class="row-span-1 col-span-1  capitalize border-r-2 border-b-2"
+          >
+            title
+            : 
+            <span
+              class="text-lg font-bold"
+            >
+              rookie
+            </span>
+          </p>
+          <p
+            class="row-span-1 col-span-1  capitalize border-r-2 border-b-2"
+          >
+            level
+            : 
+            <span
+              class="text-lg font-bold"
+            >
+              47
+            </span>
+          </p>
+          <p
+            class="row-span-1 col-span-1  capitalize border-r-2 border-b-2"
+          >
+            element
+            : 
+            <span
+              class="text-lg font-bold"
+            >
+              fire
+            </span>
+          </p>
+          <p
+            class="row-span-1 col-span-2 capitalize border-r-2 border-b-2"
+          >
+            message
+            : 
+            <span
+              class="text-lg font-bold"
+            >
+              hello
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="my-2 w-8/12 h-auto border-l-2 border-t-2 m-auto flex"
+    >
+      <div
+        class="justify-start w-2/12 h-auto border-r-2 border-b-2"
+      >
+        <img
+          alt="Profile"
+          src="profile_image.jpg"
+        />
+      </div>
+      <div
+        class="grid w-10/12 grid-rows-3  grid-cols-2"
+      >
+        <p
+          class="row-span-1 col-span-1  capitalize border-r-2 border-b-2"
+        >
+          name
+          : 
+          <span
+            class="text-lg font-bold"
+          >
+            Ken
+          </span>
+        </p>
+        <p
+          class="row-span-1 col-span-1  capitalize border-r-2 border-b-2"
+        >
+          title
+          : 
+          <span
+            class="text-lg font-bold"
+          >
+            rookie
+          </span>
+        </p>
+        <p
+          class="row-span-1 col-span-1  capitalize border-r-2 border-b-2"
+        >
+          level
+          : 
+          <span
+            class="text-lg font-bold"
+          >
+            47
+          </span>
+        </p>
+        <p
+          class="row-span-1 col-span-1  capitalize border-r-2 border-b-2"
+        >
+          element
+          : 
+          <span
+            class="text-lg font-bold"
+          >
+            fire
+          </span>
+        </p>
+        <p
+          class="row-span-1 col-span-2 capitalize border-r-2 border-b-2"
+        >
+          message
+          : 
+          <span
+            class="text-lg font-bold"
+          >
+            hello
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
