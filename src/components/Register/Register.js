@@ -4,7 +4,7 @@ import ErrorBar from '../ErrorBar/index';
 
 function Register({ onSubmit, error, resetError }) {
   const [username, setUsername] = useState('');
-  const [playerName, setPlayerName] = useState('');
+  const [playerName, setPlayerName] = useState(null);
   const [password, setPassword] = useState('');
   return (
     <div className="flex justify-center mt-4 md:mt-16">
