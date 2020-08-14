@@ -8,6 +8,7 @@ const generateNavBarButton = (name, link, currentLocation) => (
     className={`transition duration-500 hover:bg-white h-full pt-4 pr-2 ${
       currentLocation === link ? 'bg-white' : ''
     }`}
+    id={link}
   >
     <p className="text-lg font-medium">{name}</p>
   </Link>

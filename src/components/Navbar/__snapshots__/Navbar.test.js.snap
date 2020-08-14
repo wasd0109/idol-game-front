@@ -10,8 +10,9 @@ Object {
         id="navbar"
       >
         <a
-          class="transition duration-500 hover:bg-white h-full pt-4 pr-2"
+          class="transition duration-500 hover:bg-white h-full pt-4 pr-2 bg-white"
           href="/"
+          id="/"
         >
           <p
             class="text-lg font-medium"
@@ -20,8 +21,9 @@ Object {
           </p>
         </a>
         <a
-          class="transition duration-500 hover:bg-white h-full pt-4 pr-2"
+          class="transition duration-500 hover:bg-white h-full pt-4 pr-2 "
           href="/players"
+          id="/players"
         >
           <p
             class="text-lg font-medium"
@@ -30,8 +32,9 @@ Object {
           </p>
         </a>
         <a
-          class="transition duration-500 hover:bg-white h-full pt-4 pr-2"
+          class="transition duration-500 hover:bg-white h-full pt-4 pr-2 "
           href="/battle"
+          id="/battle"
         >
           <p
             class="text-lg font-medium"
@@ -40,8 +43,9 @@ Object {
           </p>
         </a>
         <a
-          class="transition duration-500 hover:bg-white h-full pt-4 pr-2"
+          class="transition duration-500 hover:bg-white h-full pt-4 pr-2 "
           href="/setting"
+          id="/setting"
         >
           <p
             class="text-lg font-medium"
@@ -68,8 +72,9 @@ Object {
       id="navbar"
     >
       <a
-        class="transition duration-500 hover:bg-white h-full pt-4 pr-2"
+        class="transition duration-500 hover:bg-white h-full pt-4 pr-2 bg-white"
         href="/"
+        id="/"
       >
         <p
           class="text-lg font-medium"
@@ -78,8 +83,9 @@ Object {
         </p>
       </a>
       <a
-        class="transition duration-500 hover:bg-white h-full pt-4 pr-2"
+        class="transition duration-500 hover:bg-white h-full pt-4 pr-2 "
         href="/players"
+        id="/players"
       >
         <p
           class="text-lg font-medium"
@@ -88,8 +94,9 @@ Object {
         </p>
       </a>
       <a
-        class="transition duration-500 hover:bg-white h-full pt-4 pr-2"
+        class="transition duration-500 hover:bg-white h-full pt-4 pr-2 "
         href="/battle"
+        id="/battle"
       >
         <p
           class="text-lg font-medium"
@@ -98,8 +105,9 @@ Object {
         </p>
       </a>
       <a
-        class="transition duration-500 hover:bg-white h-full pt-4 pr-2"
+        class="transition duration-500 hover:bg-white h-full pt-4 pr-2 "
         href="/setting"
+        id="/setting"
       >
         <p
           class="text-lg font-medium"
