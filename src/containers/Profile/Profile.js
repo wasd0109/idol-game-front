@@ -27,7 +27,7 @@ function Profile({ userID }) {
     const data = {
       userID: userID,
     };
-    return fetch("https://idol-game.herokuapp.com/action", {
+    return fetch('https://idol-game.herokuapp.com/action', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -37,19 +37,22 @@ function Profile({ userID }) {
       .then((res) => res.json())
       .then((data) => {
         setActionResults((prevState) => {
-          const newActionResults = prevState.length > 15 ? prevState.shift() : prevState
-          return [...newActionResults, data]
+          const newActionResults =
+            prevState.length > 15 ? prevState.shift() : prevState;
+          return [...newActionResults, data];
         });
       })
       .catch((error) => setActionError(error));
   };
 
   useEffect(() => {
-    fetch(`https://idol-game.herokuapp.com/profile/${userID}`)
+    fetch(`http://127.0.0.1:3001/profile/${userID}`)
       .then((res) => res.json())
-      .then((data) => { setPlayer(data[0]) })
+      .then((data) => {
+        setPlayer(data);
+      })
       .catch((error) => setPlayerError(error));
-  }, [actionResults, userID])
+  }, [actionResults, userID]);
 
   const stats = [];
   const hiddenInfo = ['id', 'userid', 'message'];
@@ -59,16 +62,16 @@ function Profile({ userID }) {
 
   const statsProps = {
     stats,
-    playerError
-  }
+    playerError,
+  };
 
   const actionsProps = {
     actionResults,
     actionError,
     actions,
     performAction,
-    userID
-  }
+    userID,
+  };
   return (
     <div className="flex mx-4 my-2 flex-wrap">
       <div className="md:w-4/12 xl:w-3/12 h-auto" id="stats">

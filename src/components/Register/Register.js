@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import ErrorBar from '../ErrorBar/index';
 
-function Register({ onSubmit, error, resetError }) {
-  const [username, setUsername] = useState('');
-  const [playerName, setPlayerName] = useState(null);
+function Register({ onRegister, error, resetError }) {
+  const [email, setEmail] = useState('');
+  const [playerName, setPlayerName] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   return (
     <div className="flex justify-center mt-4 md:mt-16">
       <div className="w-full max-w-xs">
@@ -29,17 +30,17 @@ function Register({ onSubmit, error, resetError }) {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
+              htmlFor="email"
             >
-              Username
+              Email
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
+              id="email"
               type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              placeholder="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -58,21 +59,47 @@ function Register({ onSubmit, error, resetError }) {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2 "
+              htmlFor="password"
+            >
+              Confirm Password
+            </label>
+            <input
+              className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="confirmPassword"
+              type="password"
+              placeholder="******************"
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              role="ConfirmPassword"
+            />
+          </div>
           <div className="flex items-center justify-between mt-4">
-            <button
+            <Link
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
               onClick={(event) => {
                 event.preventDefault();
                 resetError();
-                onSubmit(username, password, playerName,);
+                onRegister(email, password, confirmPassword, playerName);
               }}
+              to="/dashboard"
             >
               Register
-            </button>
-            <Link to="/" className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" onClick={resetError}><p>Login</p></Link>
+            </Link>
+            <Link
+              to="/login"
+              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              onClick={resetError}
+            >
+              <p>Login</p>
+            </Link>
           </div>
-          <div className="mt-4 mb-2">{error ? <ErrorBar msg={error} /> : null}</div>
+          <div className="mt-4 mb-2">
+            {error ? <ErrorBar msg={error} /> : null}
+          </div>
         </form>
         <div className="text-center">
           <a

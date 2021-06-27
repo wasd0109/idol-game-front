@@ -1,5 +1,10 @@
 import React, { Suspense, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import MainPage from './containers/MainPage';
 import Login from './components/Login';
 import Loader from 'react-loader-spinner';
@@ -12,9 +17,7 @@ function App() {
     username: localStorage.getItem('username')
       ? localStorage.getItem('username')
       : '',
-    userID: localStorage.getItem('userID')
-      ? localStorage.getItem('userID')
-      : '0',
+    token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
   };
 
   const [loggedIn, setLoggedIn] = useState(
@@ -23,31 +26,32 @@ function App() {
 
   const [user, setUser] = useState(initialUser);
 
-  const { username, userID } = user;
+  const { username, token } = user;
 
   useEffect(() => {
     if (loggedIn) {
       localStorage.setItem('username', username);
-      localStorage.setItem('userID', userID);
+      localStorage.setItem('token', token);
       localStorage.setItem('loggedIn', String(loggedIn));
     }
     if (!loggedIn) {
       localStorage.clear();
     }
-  }, [userID, loggedIn, username]);
+  }, [token, loggedIn, username]);
 
   const [error, setError] = useState(undefined);
 
-  const onSubmit = (username, password, playerName = undefined) => {
-    if (!username || !password || playerName === null) {
+  const isEmpty = (string) => {
+    return string.trim().length === 0 ? true : false;
+  };
+
+  const onLogin = (email, password) => {
+    if (!email || !password) {
       return setError('Please enter all information');
     }
-    const data = playerName
-      ? { username, password, playerName }
-      : { username, password };
-    const url = playerName
-      ? 'http://localhost:3001/register'
-      : 'https://idol-game.herokuapp.com/login';
+    const data = { email, password };
+    const url =
+      'http://localhost:5001/idolgame-back-f095d/us-central1/api/login';
     fetch(url, {
       method: 'post',
       headers: {
@@ -58,9 +62,42 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        const { username, id } = data;
-        if (username && id) {
-          setUser({ username: username, userID: id });
+        const token = data;
+        if (token) {
+          setUser({ token });
+          setLoggedIn(true);
+        } else setError(data);
+      })
+      .catch((error) => setError(error));
+  };
+
+  const onRegister = (email, password, confirmPassword, playerName) => {
+    if (
+      isEmpty(email) ||
+      isEmpty(password) ||
+      isEmpty(confirmPassword) ||
+      isEmpty(playerName)
+    ) {
+      return setError('Please enter all information');
+    }
+    const data = { email, password, confirmPassword, playerName };
+
+    const url =
+      'http://localhost:5001/idolgame-back-f095d/us-central1/api/register';
+
+    fetch(url, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        const token = data;
+        if (token) {
+          setUser({ token });
           setLoggedIn(true);
         } else setError(data);
       })
@@ -70,32 +107,45 @@ function App() {
   const resetError = () => {
     setError(null);
   };
+  return (
+    <Router>
+      <Route exact path="/">
+        {loggedIn ? (
+          <MainPage setLoggedIn={setLoggedIn} userID={token} />
+        ) : (
+          <Redirect to="/login" />
+        )}
+      </Route>
 
-  return loggedIn ? (
-    <MainPage userID={userID} setLoggedIn={setLoggedIn} />
-  ) : (
-    <Suspense
-      fallback={
-        <div className="flex justify-center mt-24">
-          <Loader type="TailSpin" color="#00BFFF" height={200} width={200} />
-        </div>
-      }
-    >
-      <Router>
+      <Suspense
+        fallback={
+          <div className="flex justify-center mt-24">
+            <Loader type="TailSpin" color="#00BFFF" height={200} width={200} />
+          </div>
+        }
+      >
         <Switch>
           <Route path="/register">
-            <LazyRegister
-              onSubmit={onSubmit}
-              error={error}
-              resetError={resetError}
-            />
+            {loggedIn ? (
+              <Redirect to="/" />
+            ) : (
+              <LazyRegister
+                onRegister={onRegister}
+                error={error}
+                resetError={resetError}
+              />
+            )}
           </Route>
-          <Route path="/">
-            <Login onSubmit={onSubmit} error={error} resetError={resetError} />
+          <Route path="/login">
+            {loggedIn ? (
+              <Redirect to="/" />
+            ) : (
+              <Login onLogin={onLogin} error={error} resetError={resetError} />
+            )}
           </Route>
         </Switch>
-      </Router>
-    </Suspense>
+      </Suspense>
+    </Router>
   );
 }
 

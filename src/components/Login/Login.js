@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import ErrorBar from '../ErrorBar';
 import AlertBar from '../AlertBar';
 
-function Login({ onSubmit, error, resetError }) {
-  const [username, setUsername] = useState('');
+function Login({ onLogin, error, resetError }) {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   if (error && isLoggingIn) setIsLoggingIn(false);
@@ -15,17 +15,17 @@ function Login({ onSubmit, error, resetError }) {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
+              htmlFor="email"
             >
-              Username
+              Email
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
+              id="email"
               type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              placeholder="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -50,18 +50,25 @@ function Login({ onSubmit, error, resetError }) {
               type="submit"
               onClick={(event) => {
                 event.preventDefault();
-                if (username && password)
-                  setIsLoggingIn(true);
+                if (email && password) setIsLoggingIn(true);
                 resetError();
-                onSubmit(username, password)
+                onLogin(email, password);
               }}
             >
               Login
             </button>
-            <Link to="/register" className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" onClick={resetError}><p>Register</p></Link>
+            <Link
+              to="/register"
+              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              onClick={resetError}
+            >
+              <p>Register</p>
+            </Link>
           </div>
-          <div className="mt-4 mb-2">{error ? <ErrorBar msg={error} /> : null}
-            {isLoggingIn ? <AlertBar msg="Logging in" /> : null}</div>
+          <div className="mt-4 mb-2">
+            {error ? <ErrorBar msg={error} /> : null}
+            {isLoggingIn ? <AlertBar msg="Logging in" /> : null}
+          </div>
         </form>
       </div>
     </div>
