@@ -2,30 +2,62 @@ import React, { useState, useEffect } from 'react';
 import Stats from '../../components/Stats';
 import Actions from '../../components/Actions';
 
-function Profile({ userID }) {
+function Profile({ userId }) {
   const actions = ['Practice', 'Live', 'Tsunagari', 'Tweet'];
   const [actionResults, setActionResults] = useState([]);
   const [actionError, setActionError] = useState(null);
   const [player, setPlayer] = useState({
-    name: '',
-    title: '',
-    HP: 0,
-    level: 0,
-    element: '',
-    exp: 0,
-    attack: 0,
-    defense: 0,
-    magic_attack: 0,
-    magic_defense: 0,
-    agility: 0,
-    luck: 0,
+    name: null,
+    title: null,
+    HP: null,
+    level: null,
+    element: null,
+    exp: null,
+    attack: null,
+    defense: null,
+    magic_attack: null,
+    magic_defense: null,
+    agility: null,
+    luck: null,
   });
 
   const [playerError, setPlayerError] = useState(null);
 
-  const performAction = (userID) => {
+  const prettifyStats = (stats) => {
+    const {
+      playerName,
+      HP,
+      level,
+      exp,
+      attack,
+      defense,
+      magicAttack,
+      magicDefense,
+      agility,
+      luck,
+      element,
+      title,
+    } = stats;
+
+    return {
+      name: playerName,
+      title,
+      HP,
+      level,
+      element,
+      exp,
+      attack,
+      defense,
+      magic_attack: magicAttack,
+      magic_defense: magicDefense,
+      agility,
+      luck,
+    };
+  };
+
+  const performAction = (userId) => {
     const data = {
-      userID: userID,
+      userId: userId,
     };
     return fetch('https://idol-game.herokuapp.com/action', {
       method: 'post',
@@ -46,17 +78,23 @@ function Profile({ userID }) {
   };
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:3001/profile/${userID}`)
+    console.log(userId);
+    fetch(
+      `http://localhost:5001/idolgame-back-f095d/us-central1/api/profile?userId=${userId}`
+    )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setPlayer(data);
       })
       .catch((error) => setPlayerError(error));
-  }, [actionResults, userID]);
+  }, [actionResults, userId]);
 
   const stats = [];
-  const hiddenInfo = ['id', 'userid', 'message'];
-  for (const [key, value] of Object.entries(player)) {
+
+  const prettyStats = prettifyStats(player);
+  const hiddenInfo = ['uid', 'message'];
+  for (const [key, value] of Object.entries(prettyStats)) {
     if (!hiddenInfo.includes(key)) stats.push([key.replace('_', ' '), value]);
   }
 
@@ -70,7 +108,7 @@ function Profile({ userID }) {
     actionError,
     actions,
     performAction,
-    userID,
+    userId,
   };
   return (
     <div className="flex mx-4 my-2 flex-wrap">

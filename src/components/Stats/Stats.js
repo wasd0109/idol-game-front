@@ -11,14 +11,14 @@ function Stats({ stats }) {
       {stats.map((stat) => {
         return (
           <li key={stat[0]} className="w-6/12 capitalize border-r-2 border-b-2">
-            {stat[0]}
-            {" "}
-            {stat[1] ? (
+            {stat[0]}{' '}
+            {stat[1] !== null ? (
               <span className="text-lg font-bold">{stat[1]}</span>
-            ) :
-              <span className="text-lg font-bold" id="skeleton"><Skeleton width={40} /></span>
-            }
-
+            ) : (
+              <span className="text-lg font-bold" id="skeleton">
+                <Skeleton width={40} />
+              </span>
+            )}
           </li>
         );
       })}

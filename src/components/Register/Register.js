@@ -7,6 +7,7 @@ function Register({ onRegister, error, resetError }) {
   const [playerName, setPlayerName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
   return (
     <div className="flex justify-center mt-4 md:mt-16">
       <div className="w-full max-w-xs">
@@ -54,7 +55,7 @@ function Register({ onRegister, error, resetError }) {
               className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
-              placeholder="******************"
+              placeholder="At least 6 characters"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />

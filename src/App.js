@@ -14,8 +14,8 @@ const LazyRegister = React.lazy(() => import('./components/Register'));
 
 function App() {
   const initialUser = {
-    username: localStorage.getItem('username')
-      ? localStorage.getItem('username')
+    userId: localStorage.getItem('userId')
+      ? localStorage.getItem('userId')
       : '',
     token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
   };
@@ -26,18 +26,18 @@ function App() {
 
   const [user, setUser] = useState(initialUser);
 
-  const { username, token } = user;
+  const { userId, token } = user;
 
   useEffect(() => {
     if (loggedIn) {
-      localStorage.setItem('username', username);
+      localStorage.setItem('userId', userId);
       localStorage.setItem('token', token);
       localStorage.setItem('loggedIn', String(loggedIn));
     }
     if (!loggedIn) {
       localStorage.clear();
     }
-  }, [token, loggedIn, username]);
+  }, [token, loggedIn, userId]);
 
   const [error, setError] = useState(undefined);
 
@@ -45,9 +45,17 @@ function App() {
     return string.trim().length === 0 ? true : false;
   };
 
+  const isEmail = (email) => {
+    const pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    return email.match(pattern) ? true : false;
+  };
+
   const onLogin = (email, password) => {
-    if (!email || !password) {
+    if (isEmpty(email) || isEmpty(password)) {
       return setError('Please enter all information');
+    }
+    if (!isEmail(email)) {
+      return setError('Please enter a valid email');
     }
     const data = { email, password };
     const url =
@@ -61,14 +69,12 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        const token = data;
-        if (token) {
-          setUser({ token });
+        if (data.token) {
+          setUser(data);
           setLoggedIn(true);
-        } else setError(data);
+        } else setError('User not found');
       })
-      .catch((error) => setError(error));
+      .catch((error) => [setError(error.keys)]);
   };
 
   const onRegister = (email, password, confirmPassword, playerName) => {
@@ -79,6 +85,10 @@ function App() {
       isEmpty(playerName)
     ) {
       return setError('Please enter all information');
+    } else if (password.length < 6) {
+      return setError('Password too short');
+    } else if (password !== confirmPassword) {
+      return setError("Password don't match");
     }
     const data = { email, password, confirmPassword, playerName };
 
@@ -94,14 +104,12 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        const token = data;
-        if (token) {
-          setUser({ token });
+        if (data.token) {
+          setUser(data);
           setLoggedIn(true);
         } else setError(data);
       })
-      .catch((error) => setError(error));
+      .catch((error) => console.log(error));
   };
 
   const resetError = () => {
@@ -111,7 +119,7 @@ function App() {
     <Router>
       <Route exact path="/">
         {loggedIn ? (
-          <MainPage setLoggedIn={setLoggedIn} userID={token} />
+          <MainPage setLoggedIn={setLoggedIn} userId={userId} />
         ) : (
           <Redirect to="/login" />
         )}
